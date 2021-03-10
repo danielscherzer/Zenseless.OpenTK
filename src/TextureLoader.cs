@@ -5,8 +5,16 @@ using Zenseless.Patterns;
 
 namespace Zenseless.OpenTK
 {
+	/// <summary>
+	/// Class for loading textures from images
+	/// </summary>
 	public static class TextureLoader
 	{
+		/// <summary>
+		/// Load a texture out of the given stream.
+		/// </summary>
+		/// <param name="stream">A stream containing an image.</param>
+		/// <returns>A Texture.</returns>
 		public static Texture Load(Stream stream)
 		{
 			using var image = new MagickImage(stream);
@@ -33,6 +41,11 @@ namespace Zenseless.OpenTK
 			return texture;
 		}
 
+		/// <summary>
+		/// Load a texture out of the given embedded resource.
+		/// </summary>
+		/// <param name="name">The name of the resource that contains an image.</param>
+		/// <returns>A Texture.</returns>
 		public static Texture LoadFromResource(string name)
 		{
 			using var stream = Resource.LoadStream(name);
