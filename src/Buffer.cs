@@ -9,7 +9,7 @@ namespace Zenseless.OpenTK
 	/// A class that encapsulates an OpenGL buffer object.
 	/// </summary>
 	/// <seealso cref="Disposable" />
-	public class Buffer : Disposable, IObjectGL
+	public class Buffer : Disposable, IObjectHandle
 	{
 		/// <summary>
 		/// Constructs a new OpenGL buffer object.

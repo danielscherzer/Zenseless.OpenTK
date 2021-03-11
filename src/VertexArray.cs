@@ -7,7 +7,7 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// A vertex array class for interpreting buffer data.
 	/// </summary>
-	public class VertexArray : Disposable, IObjectGL
+	public class VertexArray : Disposable, IObjectHandle
 	{
 		/// <summary>
 		/// Create a new vertex array object

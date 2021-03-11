@@ -6,7 +6,7 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// Class that encapsulated an OpenGL texture object
 	/// </summary>
-	public class Texture : Disposable, IObjectGL
+	public class Texture : Disposable, IObjectHandle
 	{
 		/// <summary>
 		/// Depth component format
