@@ -14,6 +14,10 @@ dotnet_csproj:
 
 image: Visual Studio 2019
 
+install:
+  # Install OpenGL
+  - "powershell ./install-opengl.ps1"
+
 configuration:
 - Release
 
@@ -33,3 +37,5 @@ deploy:
   skip_symbols: false
   artifact: /.*\.nupkg/
 
+on_finish:
+  - "powershell ./install-opengl.ps1 uninstall"
