@@ -24,7 +24,7 @@ namespace Zenseless.OpenTK.Tests
 			window.Close();
 			return result;
 		}
-#if !APPVEYOR
+
 		[TestMethod()]
 		public void ToByteArrayTest()
 		{
@@ -39,6 +39,5 @@ namespace Zenseless.OpenTK.Tests
 			//var settings = new PixelReadSettings(size, size, StorageType.Char, PixelMapping.RGB);
 			//using var image = new MagickImage(buffer, settings);
 		}
-#endif
 	}
 }
