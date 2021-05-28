@@ -1,4 +1,5 @@
 # Script taken from https://github.com/opentk/opentk/blob/master/install-opengl.ps1
+# Used for CI build. Purpose is to allow tests that run on appveyor to use OpenGL.
 # Some modifications to this file copied from the VisPy project
 # which is released under a BSD 3-clause license
 
