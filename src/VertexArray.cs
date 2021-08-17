@@ -7,7 +7,7 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// A vertex array class for interpreting buffer data.
 	/// </summary>
-	public class VertexArray : Disposable, IObjectHandle
+	public class VertexArray : Disposable, IObjectHandle<VertexArray>
 	{
 		/// <summary>
 		/// Create a new vertex array object
@@ -15,13 +15,13 @@ namespace Zenseless.OpenTK
 		public VertexArray()
 		{
 			GL.CreateVertexArrays(1, out int handle);
-			Handle = handle;
+			Handle = new(handle);
 		}
 
 		/// <summary>
 		/// Returns the OpenGL object handle
 		/// </summary>
-		public int Handle { get; }
+		public Handle<VertexArray> Handle { get; }
 
 		/// <summary>
 		/// Binds the given buffer as an element buffer to the vertex array object

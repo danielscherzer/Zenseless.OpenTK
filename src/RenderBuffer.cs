@@ -7,7 +7,7 @@ namespace Zenseless.OpenTK
 	/// OpenGL Objects that contain images. They are created and used specifically with Framebuffer Objects. They are optimized for use as render targets.
 	/// </summary>
 	/// <seealso cref="Disposable" />
-	public class RenderBuffer : Disposable, IObjectHandle
+	public class RenderBuffer : Disposable, IObjectHandle<RenderBuffer>
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RenderBuffer"/> class.
@@ -18,14 +18,14 @@ namespace Zenseless.OpenTK
 		public RenderBuffer(RenderbufferStorage type, int width, int height)
 		{
 			GL.CreateRenderbuffers(1, out int handle);
-			Handle = handle;
+			Handle = new(handle);
 			GL.NamedRenderbufferStorage(handle, type, width, height);
 		}
 
 		/// <summary>
 		/// Returns the OpenGL object handle
 		/// </summary>
-		public int Handle { get; private set; } = -1;
+		public Handle<RenderBuffer> Handle { get; }
 
 		/// <summary>
 		/// Will be called from the default Dispose method.

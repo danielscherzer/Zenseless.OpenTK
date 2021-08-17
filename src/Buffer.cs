@@ -9,7 +9,7 @@ namespace Zenseless.OpenTK
 	/// A class that encapsulates an OpenGL buffer object.
 	/// </summary>
 	/// <seealso cref="Disposable" />
-	public class Buffer : Disposable, IObjectHandle
+	public class Buffer : Disposable, IObjectHandle<Buffer>
 	{
 		/// <summary>
 		/// Constructs a new OpenGL buffer object.
@@ -17,13 +17,13 @@ namespace Zenseless.OpenTK
 		public Buffer()
 		{
 			GL.CreateBuffers(1, out int handle);
-			Handle = handle;
+			Handle = new(handle);
 		}
 
 		/// <summary>
 		/// Returns the OpenGL handle
 		/// </summary>
-		public int Handle { get; }
+		public Handle<Buffer> Handle { get; }
 
 		/// <summary>
 		/// Copies the given data into a buffer object on the GPU.

@@ -6,7 +6,7 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// Class that encapsulated an OpenGL texture object
 	/// </summary>
-	public class Texture : Disposable, IObjectHandle
+	public class Texture : Disposable, IObjectHandle<Texture>
 	{
 		/// <summary>
 		/// Depth component format
@@ -24,7 +24,7 @@ namespace Zenseless.OpenTK
 		public Texture(int width, int height, SizedInternalFormat format = SizedInternalFormat.Rgba8, int levels = 0, TextureTarget target = TextureTarget.Texture2D)
 		{
 			GL.CreateTextures(target, 1, out int handle);
-			Handle = handle;
+			Handle = new(handle);
 			Width = width;
 			Height = height;
 			if (0 == levels) levels = MathHelper.MipMapLevelCount(width, height);
@@ -34,11 +34,13 @@ namespace Zenseless.OpenTK
 		/// <summary>
 		/// Returns the OpenGL object handle
 		/// </summary>
-		public int Handle { get; }
+		public Handle<Texture> Handle { get; }
+
 		/// <summary>
 		/// The width of the texture in texels
 		/// </summary>
 		public int Width { get; }
+
 		/// <summary>
 		/// The height of the texture in texels
 		/// </summary>
