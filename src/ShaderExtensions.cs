@@ -29,7 +29,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The name of the uniform.</param>
 		/// <returns>A location.</returns>
-		public static int CheckedUniformLocation(this ShaderProgram shaderProgram, string name)
+		public static int GetCheckedUniformLocation(this ShaderProgram shaderProgram, string name)
 		{
 			var location = GL.GetUniformLocation(shaderProgram.Handle, name);
 			Debug.WriteLineIf(-1 == location, $"Uniform '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
@@ -193,7 +193,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, uint value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, uint value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -201,7 +201,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, int value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, int value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -209,7 +209,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, float value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, float value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -217,7 +217,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, float[] value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, float[] value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -225,7 +225,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector2 value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector2 value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -233,7 +233,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector2[] value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector2[] value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -241,7 +241,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector3 value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector3 value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -249,7 +249,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector3[] value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector3[] value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -257,7 +257,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Color4 value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Color4 value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -265,7 +265,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector4 value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector4 value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -273,7 +273,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector4[] value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Vector4[] value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -281,7 +281,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Matrix4 value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Matrix4 value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets an uniform of a given shader program to the given value.
@@ -289,7 +289,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The uniforms name.</param>
 		/// <param name="value">The new value to set.</param>
-		public static void Uniform(this ShaderProgram shaderProgram, string name, Matrix4[] value) => shaderProgram.Uniform(shaderProgram.CheckedUniformLocation(name), value);
+		public static void Uniform(this ShaderProgram shaderProgram, string name, Matrix4[] value) => shaderProgram.Uniform(shaderProgram.GetCheckedUniformLocation(name), value);
 
 		/// <summary>
 		/// Sets a samplers texture unit for a given shader program.
@@ -297,6 +297,6 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The samplers name.</param>
 		/// <param name="textureUnit">The texture unit the samples should be using.</param>
-		public static void SamplerUnit(this ShaderProgram shaderProgram, string name, int textureUnit) => shaderProgram.SamplerUnit(shaderProgram.CheckedUniformLocation(name), textureUnit);
+		public static void SamplerUnit(this ShaderProgram shaderProgram, string name, int textureUnit) => shaderProgram.SamplerUnit(shaderProgram.GetCheckedUniformLocation(name), textureUnit);
 	}
 }
