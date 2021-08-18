@@ -6,7 +6,7 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// Class that encapsulated an OpenGL texture object
 	/// </summary>
-	public class Texture : Disposable, IObjectHandle<Texture>
+	public class Texture2D : Disposable, IObjectHandle<Texture2D>
 	{
 		/// <summary>
 		/// Depth component format
@@ -14,14 +14,14 @@ namespace Zenseless.OpenTK
 		public const SizedInternalFormat DepthComponent32f = (SizedInternalFormat)All.DepthComponent32f;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Texture" /> class.
+		/// Initializes a new instance of the <see cref="Texture2D" /> class.
 		/// </summary>
 		/// <param name="width">the width of the texture in texels</param>
 		/// <param name="height">the height of the texture in texels</param>
 		/// <param name="format">the internal format of the texture</param>
 		/// <param name="levels">the number of mip map levels to store in the texture</param>
 		/// <param name="target">The texture target</param>
-		public Texture(int width, int height, SizedInternalFormat format = SizedInternalFormat.Rgba8, int levels = 0, TextureTarget target = TextureTarget.Texture2D)
+		public Texture2D(int width, int height, SizedInternalFormat format = SizedInternalFormat.Rgba8, int levels = 0, TextureTarget target = TextureTarget.Texture2D)
 		{
 			GL.CreateTextures(target, 1, out int handle);
 			Handle = new(handle);
@@ -34,7 +34,7 @@ namespace Zenseless.OpenTK
 		/// <summary>
 		/// Returns the OpenGL object handle
 		/// </summary>
-		public Handle<Texture> Handle { get; }
+		public Handle<Texture2D> Handle { get; }
 
 		/// <summary>
 		/// The width of the texture in texels
@@ -57,7 +57,6 @@ namespace Zenseless.OpenTK
 				_function = value;
 				GL.TextureParameter(Handle, TextureParameterName.TextureWrapS, (int)value);
 				GL.TextureParameter(Handle, TextureParameterName.TextureWrapT, (int)value);
-				GL.TextureParameter(Handle, TextureParameterName.TextureWrapR, (int)value);
 			}
 		}
 

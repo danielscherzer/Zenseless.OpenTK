@@ -1,21 +1,20 @@
 ﻿using ImageMagick;
 using OpenTK.Graphics.OpenGL4;
 using System.IO;
-using Zenseless.Patterns;
 
 namespace Zenseless.OpenTK
 {
 	/// <summary>
 	/// Class for loading textures from images
 	/// </summary>
-	public static class TextureLoader
+	public static class Texture2DLoader
 	{
 		/// <summary>
-		/// Load a texture out of the given stream.
+		/// Load a texture from the given stream.
 		/// </summary>
 		/// <param name="stream">A stream containing an image.</param>
 		/// <returns>A Texture.</returns>
-		public static Texture Load(Stream stream)
+		public static Texture2D Load(Stream stream)
 		{
 			using var image = new MagickImage(stream);
 			var format = PixelFormat.Rgb;
@@ -29,7 +28,7 @@ namespace Zenseless.OpenTK
 			}
 			image.Flip();
 			var bytes = image.GetPixelsUnsafe().ToArray();
-			var texture = new Texture(image.Width, image.Height, internalFormat)
+			var texture = new Texture2D(image.Width, image.Height, internalFormat)
 			{
 				Function = TextureWrapMode.ClampToEdge,
 				MagFilter = TextureMagFilter.Linear,
@@ -39,17 +38,6 @@ namespace Zenseless.OpenTK
 			GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, bytes);
 			GL.GenerateTextureMipmap(texture.Handle);
 			return texture;
-		}
-
-		/// <summary>
-		/// Load a texture out of the given embedded resource.
-		/// </summary>
-		/// <param name="name">The name of the resource that contains an image.</param>
-		/// <returns>A Texture.</returns>
-		public static Texture LoadFromResource(string name)
-		{
-			using var stream = Resource.LoadStream(name);
-			return Load(stream);
 		}
 	}
 }

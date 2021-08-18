@@ -31,7 +31,7 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="attachmentPoint">The attachment point where the requested texture is attached to.</param>
 		/// <returns></returns>
-		public Texture GetTexture(FramebufferAttachment attachmentPoint) => _attachedTextures[attachmentPoint];
+		public Texture2D GetTexture(FramebufferAttachment attachmentPoint) => _attachedTextures[attachmentPoint];
 
 		/// <summary>
 		/// Handle of the currently active frame buffer. Equals 0 if the default is active
@@ -56,7 +56,7 @@ namespace Zenseless.OpenTK
 		/// <exception cref="FrameBufferException">
 		/// Given texture is null or texture dimensions do not match primary texture
 		/// </exception>
-		public void Attach(Texture texture, FramebufferAttachment attachmentPoint)
+		public void Attach(Texture2D texture, FramebufferAttachment attachmentPoint)
 		{
 			if (texture is null) throw new ArgumentNullException(nameof(texture));
 			if (0 < _attachedTextures.Count)
@@ -125,7 +125,7 @@ namespace Zenseless.OpenTK
 			GL.DeleteFramebuffer(Handle);
 		}
 
-		private readonly Dictionary<FramebufferAttachment, Texture> _attachedTextures = new();
+		private readonly Dictionary<FramebufferAttachment, Texture2D> _attachedTextures = new();
 		private readonly List<IDisposable> _disposables = new();
 
 		private void CheckFramebufferStatus()
