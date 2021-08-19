@@ -46,16 +46,16 @@ namespace Zenseless.OpenTK
 		/// <param name="attributeLocation">binding location</param>
 		/// <param name="buffer">the buffer with the attribute data</param>
 		/// <param name="baseTypeCount">Each buffer element consists of a type that is made up of multiple base types like for Vector3 the base type count is 3.</param>
-		/// <param name="elementByteSize">Byte size of one buffer element</param>
+		/// <param name="stride">Byte distance from one buffer element to next. OFten the size in byte of one element, except for interleaved buffers.</param>
 		/// <param name="type">Element base type</param>
 		/// <param name="perInstance">Is this attribute per instance</param>
 		/// <param name="normalized">Should the input data be normalized</param>
 		/// <param name="offset">Offset into the buffer</param>
-		public void BindAttribute(int attributeLocation, Buffer buffer, int baseTypeCount, int elementByteSize, VertexAttribType type, bool perInstance = false, bool normalized = false, int offset = 0)
+		public void BindAttribute(int attributeLocation, Buffer buffer, int baseTypeCount, int stride, VertexAttribType type, bool perInstance = false, bool normalized = false, int offset = 0)
 		{
 			if (-1 == attributeLocation) throw new ArgumentException("Invalid attribute location");
 			GL.EnableVertexArrayAttrib(Handle, attributeLocation);
-			GL.VertexArrayVertexBuffer(Handle, attributeLocation, buffer.Handle, new IntPtr(offset), elementByteSize);
+			GL.VertexArrayVertexBuffer(Handle, attributeLocation, buffer.Handle, new IntPtr(offset), stride);
 			GL.VertexArrayAttribBinding(Handle, attributeLocation, attributeLocation);
 			GL.VertexArrayAttribFormat(Handle, attributeLocation, baseTypeCount, type, normalized, 0);
 			if (perInstance)
