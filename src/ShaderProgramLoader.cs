@@ -12,21 +12,21 @@ namespace Zenseless.OpenTK
 		/// <summary>
 		/// Creates and compiles a shader.
 		/// </summary>
-		/// <param name="type">The shader type.</param>
+		/// <param name="shaderType">The shader type.</param>
 		/// <param name="shaderSource">The sourcce code of the shader.</param>
 		/// <returns>OpenGL handle of the shader.</returns>
 		/// <exception cref="ShaderException"/>
-		public static int CreateShader(ShaderType type, string shaderSource)
+		public static int CreateShader(ShaderType shaderType, string shaderSource)
 		{
-			var shader = GL.CreateShader(type);
-			GL.ShaderSource(shader, shaderSource);
-			GL.CompileShader(shader);
-			var log = GetShaderLog(shader);
+			var handle = GL.CreateShader(shaderType);
+			GL.ShaderSource(handle, shaderSource);
+			GL.CompileShader(handle);
+			var log = GetShaderLog(handle);
 			if (!string.IsNullOrEmpty(log))
 			{
-				throw new ShaderException(type, log);
+				throw new ShaderException(shaderType, log);
 			}
-			return shader;
+			return handle;
 		}
 
 		/// <summary>
