@@ -11,11 +11,30 @@ namespace Zenseless.OpenTK
 	public static class VectorExtensions
 	{
 		/// <summary>
+		/// Returns for each component the absolute value.
+		/// </summary>
+		/// <param name="value">The input value.</param>
+		/// <returns></returns>
+		public static Vector3 Abs(this in Vector3 value) => new(MathF.Abs(value.X), MathF.Abs(value.Y), MathF.Abs(value.Z));
+
+		/// <summary>
 		/// Returns for each component the smallest integer bigger than or equal to the specified floating-point number.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns></returns>
 		public static Vector2 Ceiling(in Vector2 value) => new(MathF.Ceiling(value.X), MathF.Ceiling(value.Y));
+
+		/// <summary>
+		/// Clamp each component of the input vector v in between min and max. 
+		/// </summary>
+		/// <param name="v">input vector that will be clamped component-wise</param>
+		/// <param name="min">lower limit</param>
+		/// <param name="max">upper limit</param>
+		/// <returns>clamped version of v</returns>
+		public static Vector3 Clamp(this in Vector3 v, float min, float max)
+		{
+			return new Vector3(v.X.Clamp(min, max), v.Y.Clamp(min, max), v.Z.Clamp(min, max));
+		}
 
 		/// <summary>
 		/// Calculates the determinant of the two vectors.
@@ -176,6 +195,29 @@ namespace Zenseless.OpenTK
 		/// <param name="color">The input float array to convert.</param>
 		/// <returns>A <see cref="Color4"/></returns>
 		public static Color4 ToColor4(this float[] color) => new(color[0], color[1], color[2], color[3]);
+
+		/// <summary>
+		/// Converts HSB (Hue, Saturation and Brightness) color value into RGB
+		/// </summary>
+		/// <param name="hue">Hue [0..1]</param>
+		/// <param name="saturation">Saturation [0..1]</param>
+		/// <param name="brightness">Brightness [0..1]</param>
+		/// <returns>
+		/// RGB color
+		/// </returns>
+		public static (float red, float green, float blue) Hsb2rgb(float hue, float saturation, float brightness)
+		{
+			saturation = global::OpenTK.Mathematics.MathHelper.Clamp(saturation, 0f, 1f);
+			brightness = global::OpenTK.Mathematics.MathHelper.Clamp(brightness, 0f, 1f);
+			var v3 = new Vector3(3f);
+			var i = hue * 6f;
+			var j = new Vector3(i, i + 4f, i + 2f).Mod(6f);
+			var k = (j - v3).Abs();
+			var l = k - Vector3.One;
+			var rgb = l.Clamp(0f, 1f);
+			var result = brightness * Vector3.Lerp(Vector3.One, rgb, saturation);
+			return (result.X, result.Y, result.Z);
+		}
 
 		/// <summary>
 		/// Converts given Cartesian coordinates into polar coordinates.
