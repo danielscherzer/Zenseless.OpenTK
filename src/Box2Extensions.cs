@@ -8,6 +8,31 @@ namespace Zenseless.OpenTK
 	public static class Box2Extensions
 	{
 		/// <summary>
+		/// Create a new instance of <see cref="Box2"/> from its center and a size vector
+		/// </summary>
+		/// <param name="center">The center.</param>
+		/// <param name="size">A size vector.</param>
+		/// <returns>A new instance of <see cref="Box2"/></returns>
+		public static Box2 CreateFromCenterSize(Vector2 center, Vector2 size)
+		{
+			var sizeH = 0.5f * size;
+			return new(center - sizeH, center + sizeH);
+		}
+
+		/// <summary>
+		/// Create a new instance of <see cref="Box2"/> from its center and a size vector
+		/// </summary>
+		/// <param name="centerX">The center point x-coordinate.</param>
+		/// <param name="centerY">The cetner point y-coordinate.</param>
+		/// <param name="width">The width.</param>
+		/// <param name="height">The height.</param>
+		/// <returns>A new instance of <see cref="Box2"/></returns>
+		public static Box2 CreateFromCenterSize(float centerX, float centerY, float width, float height)
+		{
+			return CreateFromCenterSize(new Vector2(centerX, centerY), new Vector2(width, height));
+		}
+
+		/// <summary>
 		/// Create a new instance of <see cref="Box2"/> from a minimal corner point and a size vector
 		/// </summary>
 		/// <param name="min">A minimal corner point.</param>
