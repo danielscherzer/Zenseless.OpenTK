@@ -12,29 +12,18 @@ namespace Zenseless.OpenTK.Tests
 	[TestClass()]
 	public class FrameBufferHelperTests
 	{
-		private const int size = 256;
-
-		private static T ExecuteOnOpenGL<T>(Func<T> action)
-		{
-			var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability, StartVisible = false })
-			{
-				Size = new Vector2i(size),
-			};
-			var result = action();
-			window.Close();
-			return result;
-		}
-
 		[TestMethod()]
 		public void ToByteArrayTest()
 		{
+			const int res = 256;
+
 			static byte[] Execute()
 			{
 				GL.ClearColor(Color4.Gray);
 				GL.Clear(ClearBufferMask.ColorBufferBit);
-				return FrameBufferHelper.ToByteArray(0, 0, size, size);
+				return FrameBufferHelper.ToByteArray(0, 0, res, res);
 			}
-			var buffer = ExecuteOnOpenGL(Execute);
+			var buffer = Helper.ExecuteOnOpenGL(res, res, Execute);
 			Assert.IsTrue(buffer.All(value => value == 128));
 			//var settings = new PixelReadSettings(size, size, StorageType.Char, PixelMapping.RGB);
 			//using var image = new MagickImage(buffer, settings);

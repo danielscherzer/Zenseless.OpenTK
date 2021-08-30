@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Content\roughness.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.6" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.6" />
+    <PackageReference Include="Zenseless.Resources" Version="0.1.4" />
   </ItemGroup>
 
   <ItemGroup>

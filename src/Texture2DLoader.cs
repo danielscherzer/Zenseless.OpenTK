@@ -21,7 +21,7 @@ namespace Zenseless.OpenTK
 			var internalFormat = (SizedInternalFormat)All.Rgb8; //till OpenTK issue resolved on github https://github.com/opentk/opentk/issues/752
 			switch (image.ChannelCount)
 			{
-				case 2: format = PixelFormat.LuminanceAlpha; internalFormat = SizedInternalFormat.Rg8; break;
+				case 2: format = PixelFormat.Rg; internalFormat = SizedInternalFormat.Rg8; break;
 				case 3: break;
 				case 4: format = PixelFormat.Rgba; internalFormat = SizedInternalFormat.Rgba8; break;
 				default: throw new InvalidDataException("Unexpected image format");
