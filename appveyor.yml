@@ -14,10 +14,10 @@ dotnet_csproj:
 
 image: Visual Studio 2019
 
-test:
+#test:
   # only categories to test
-  categories:
-    - A
+ # categories:
+#    - A
 
 install:
   # Install OpenGL
