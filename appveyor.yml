@@ -14,14 +14,14 @@ dotnet_csproj:
 
 image: Visual Studio 2019
 
-#test:
-  # only categories to test
- # categories:
-#    - A
+test:
+   only categories to test
+  categories:
+    - A
 
 install:
   # Install OpenGL
-  - "powershell ./install-opengl.ps1"
+  - "powershell ./install-opengl.ps1 uninstall"
 
 configuration:
 - Release
