@@ -15,7 +15,7 @@ dotnet_csproj:
 image: Visual Studio 2019
 
 test:
-   only categories to test
+  # only categories to test
   categories:
     - A
 
