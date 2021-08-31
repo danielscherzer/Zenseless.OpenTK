@@ -47,6 +47,7 @@ namespace Zenseless.OpenTK
 		/// <param name="usageHint">How will this buffer object be used</param>
 		public void Set(IntPtr data, int byteSize, BufferUsageHint usageHint = BufferUsageHint.StaticDraw)
 		{
+			if (0 == byteSize) throw new ArgumentException($"{nameof(byteSize)} = 0");
 			GL.NamedBufferData(Handle, byteSize, data, usageHint); //copy data over to GPU
 		}
 

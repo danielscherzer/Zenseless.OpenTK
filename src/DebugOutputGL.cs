@@ -16,7 +16,7 @@ namespace Zenseless.OpenTK
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DebugOutputGL"/> class.
 		/// </summary>
-		public DebugOutputGL()
+		public DebugOutputGL(DebugSeverityControl debugSeverityControl = DebugSeverityControl.DebugSeverityLow)
 		{
 			Trace.WriteLine($"{GL.GetString(StringName.Renderer)} running OpenGL " +
 				$"Version {GL.GetInteger(GetPName.MajorVersion)}.{GL.GetInteger(GetPName.MinorVersion)} with ");
@@ -26,7 +26,7 @@ namespace Zenseless.OpenTK
 			Trace.WriteLine(GL.GetString(StringName.Extensions));
 			debugCallback = DebugCallback; //need to keep an instance, otherwise delegate is garbage collected
 			GL.DebugMessageCallback(debugCallback, IntPtr.Zero);
-			GL.DebugMessageControl(DebugSourceControl.DontCare, DebugTypeControl.DontCare, DebugSeverityControl.DontCare, 0, Array.Empty<int>(), true);
+			GL.DebugMessageControl(DebugSourceControl.DontCare, DebugTypeControl.DontCare, debugSeverityControl, 0, Array.Empty<int>(), true);
 		}
 
 		/// <summary>

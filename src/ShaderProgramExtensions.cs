@@ -8,10 +8,10 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// <see cref="ShaderProgram"/> extension methods to work with attributes and uniforms.
 	/// </summary>
-	public static class ShaderExtensions
+	public static class ShaderProgramExtensions
 	{
 		/// <summary>
-		/// Gets the attribute location for the given shader program and name. Writes a message to the Debug output if the attribute name is unknown.
+		/// Gets the attribute location for the given shader program and name. Writes a message to the <see cref="Trace"/> output if the attribute name is unknown.
 		/// </summary>
 		/// <param name="shaderProgram">A <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The name of the attribute.</param>
@@ -19,12 +19,26 @@ namespace Zenseless.OpenTK
 		public static int GetCheckedAttributeLocation(this ShaderProgram shaderProgram, string name)
 		{
 			var location = GL.GetAttribLocation(shaderProgram.Handle, name);
-			Debug.WriteLineIf(-1 == location, $"Attribute '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
+			//TODO: if (-1 == location) throw new ShaderProgramException($"Attribute '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
+			Trace.WriteLineIf(-1 == location, $"Attribute '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
 			return location;
 		}
 
 		/// <summary>
-		/// Gets the uniform location for the given shader program and name. Writes a message to the Debug output if the uniform name is unknown.
+		/// Gets the shader storage block location for the given shader program and name. Writes a message to the <see cref="Trace"/> output if the name is unknown.
+		/// </summary>
+		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
+		/// <param name="name">The name of the uniform.</param>
+		/// <returns>A location.</returns>
+		public static int GetCheckedShaderStorageBlockLocation(this ShaderProgram shaderProgram, string name)
+		{
+			var location = GL.GetProgramResourceIndex(shaderProgram.Handle, ProgramInterface.ShaderStorageBlock, name);
+			Trace.WriteLineIf(-1 == location, $"Shader storage block '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
+			return location;
+		}
+
+		/// <summary>
+		/// Gets the uniform location for the given shader program and name. Writes a message to the <see cref="Trace"/> output if the uniform name is unknown.
 		/// </summary>
 		/// <param name="shaderProgram">The <see cref="ShaderProgram"/>.</param>
 		/// <param name="name">The name of the uniform.</param>
@@ -32,7 +46,7 @@ namespace Zenseless.OpenTK
 		public static int GetCheckedUniformLocation(this ShaderProgram shaderProgram, string name)
 		{
 			var location = GL.GetUniformLocation(shaderProgram.Handle, name);
-			Debug.WriteLineIf(-1 == location, $"Uniform '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
+			Trace.WriteLineIf(-1 == location, $"Uniform '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
 			return location;
 		}
 
