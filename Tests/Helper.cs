@@ -7,14 +7,13 @@ namespace Zenseless.OpenTK.Tests
 {
 	class Helper
 	{
-		internal static T ExecuteOnOpenGL<T>(int width, int height, Func<T> action)
+		internal static T ExecuteOnOpenGL<T>(Func<T> action, Version apiVersion, ContextFlags flags = ContextFlags.Debug, int width = 256, int height = 256)
 		{
-			var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings 
+			var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings
 			{
-				Flags = ContextFlags.Debug,
-				APIVersion = new Version(4, 5),
-				Profile = ContextProfile.Compatability,
-				//Profile = ContextProfile.Core,
+				Flags = flags,
+				APIVersion = apiVersion,
+				Profile = ContextProfile.Core,
 				StartVisible = false
 			})
 			{
@@ -26,5 +25,7 @@ namespace Zenseless.OpenTK.Tests
 			window.Close();
 			return result;
 		}
+		internal static T ExecuteOnOpenGL<T>(Func<T> action) => ExecuteOnOpenGL(action, new Version(4, 5));
+		internal static T ExecuteOnOpenGL<T>(int width, int height, Func<T> action) => ExecuteOnOpenGL(action, new Version(4, 5), ContextFlags.Debug, width, height);
 	}
 }

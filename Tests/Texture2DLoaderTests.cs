@@ -11,7 +11,7 @@ namespace Zenseless.OpenTK.Tests
 		{
 			EmbeddedResourceDirectory resourceDirectory = new("Zenseless.OpenTK.Tests.Content");
 			using var stream = resourceDirectory.Resource("roughness.png").Open();
-			Helper.ExecuteOnOpenGL(256, 256, () => 
+			Helper.ExecuteOnOpenGL(() => 
 			{
 				var tex = Texture2DLoader.Load(stream);
 				Assert.AreEqual(1024, tex.Width);

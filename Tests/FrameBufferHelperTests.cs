@@ -1,10 +1,6 @@
-﻿using ImageMagick;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.Desktop;
-using System;
 using System.Linq;
 
 namespace Zenseless.OpenTK.Tests

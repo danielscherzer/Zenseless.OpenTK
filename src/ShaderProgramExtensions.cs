@@ -19,7 +19,6 @@ namespace Zenseless.OpenTK
 		public static int GetCheckedAttributeLocation(this ShaderProgram shaderProgram, string name)
 		{
 			var location = GL.GetAttribLocation(shaderProgram.Handle, name);
-			//TODO: if (-1 == location) throw new ShaderProgramException($"Attribute '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
 			Trace.WriteLineIf(-1 == location, $"Attribute '{name}' not found in shader program {shaderProgram.GetType().Name}({shaderProgram.Handle})");
 			return location;
 		}
