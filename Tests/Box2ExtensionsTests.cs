@@ -40,8 +40,8 @@ namespace Zenseless.OpenTK.Tests
 		{
 			Box2 boxA = new(aminX, aminY, amaxX, amaxY);
 			Box2 boxB = new(bminX, bminY, bmaxX, bmaxY);
-			Assert.AreEqual(expected, boxA.Intersects(boxB));
-			Assert.AreEqual(expected, boxB.Intersects(boxA));
+			Assert.AreEqual(expected, boxA.Overlap(boxB));
+			Assert.AreEqual(expected, boxB.Overlap(boxA));
 		}
 
 		public static IEnumerable<object[]> GetData()

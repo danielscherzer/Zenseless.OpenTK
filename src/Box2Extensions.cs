@@ -95,11 +95,11 @@ namespace Zenseless.OpenTK
 		/// <param name="a">The first box.</param>
 		/// <param name="b">The second box.</param>
 		/// <returns><c>true</c> if the two boxes do overlap.</returns>
-		public static bool Intersects(this Box2 a, Box2 b)
+		public static bool Overlap(this Box2 a, Box2 b)
 		{
-			bool noXintersect = a.Max.X <= b.Min.X || a.Min.X >= b.Max.X;
-			bool noYintersect = a.Max.Y <= b.Min.Y || a.Min.Y >= b.Max.Y;
-			return !(noXintersect || noYintersect);
+			bool noXoverlap = a.Max.X <= b.Min.X || a.Min.X >= b.Max.X;
+			bool noYoverlap = a.Max.Y <= b.Min.Y || a.Min.Y >= b.Max.Y;
+			return !(noXoverlap || noYoverlap);
 		}
 	}
 }
