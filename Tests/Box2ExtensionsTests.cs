@@ -36,12 +36,12 @@ namespace Zenseless.OpenTK.Tests
 		[DataRow(-1, -1, 1, 3, 1, -1, 4, 0, false)] // share single line
 		[DataRow(-1, -1, 1, 3, 0.99f, -1, 4, 0, true)] // slightly overlapping
 		[DataRow(-1, -1, 1, 3, 0f, -1, 4, -0.99f, true)] // slightly overlapping
-		public void IntersectsTest(float aminX, float aminY, float amaxX, float amaxY, float bminX, float bminY, float bmaxX, float bmaxY, bool expected)
+		public void OverlapTest(float aminX, float aminY, float amaxX, float amaxY, float bminX, float bminY, float bmaxX, float bmaxY, bool expected)
 		{
 			Box2 boxA = new(aminX, aminY, amaxX, amaxY);
 			Box2 boxB = new(bminX, bminY, bmaxX, bmaxY);
-			Assert.AreEqual(expected, boxA.Overlap(boxB));
-			Assert.AreEqual(expected, boxB.Overlap(boxA));
+			Assert.AreEqual(expected, boxA.Overlaps(boxB));
+			Assert.AreEqual(expected, boxB.Overlaps(boxA));
 		}
 
 		public static IEnumerable<object[]> GetData()
