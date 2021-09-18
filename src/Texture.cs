@@ -21,6 +21,7 @@ namespace Zenseless.OpenTK
 		{
 			GL.CreateTextures(target, 1, out int handle);
 			Handle = new(handle);
+			Target = target;
 		}
 
 		/// <summary>
@@ -68,6 +69,11 @@ namespace Zenseless.OpenTK
 				GL.TextureParameter(Handle, TextureParameterName.TextureMagFilter, (int)value);
 			}
 		}
+
+		/// <summary>
+		/// The OpenGL texture target
+		/// </summary>
+		public TextureTarget Target { get; }
 
 		/// <summary>
 		/// Will be called from the default Dispose method.

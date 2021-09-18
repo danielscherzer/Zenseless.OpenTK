@@ -1,5 +1,4 @@
-﻿using Zenseless.OpenTK;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
 using System;
 
@@ -31,17 +30,6 @@ namespace Zenseless.OpenTK.Tests
 					}
 				}
 			}
-		}
-
-		[DataTestMethod()]
-		[DataRow(new float[] { 1f, 0.5f, 0.25f, 0.1f})]
-		public void ToColor4Test(float[] input)
-		{
-			var color = input.ToColor4();
-			Assert.AreEqual(input[0], color.R);
-			Assert.AreEqual(input[1], color.G);
-			Assert.AreEqual(input[2], color.B);
-			Assert.AreEqual(input[3], color.A);
 		}
 
 		[DataTestMethod()]
