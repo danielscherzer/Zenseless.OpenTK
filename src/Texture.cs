@@ -25,6 +25,14 @@ namespace Zenseless.OpenTK
 		}
 
 		/// <summary>
+		/// Binds the texture to the current texture unit
+		/// </summary>
+		public void Bind()
+		{
+			GL.BindTexture(Target, Handle);
+		}
+
+		/// <summary>
 		/// Returns the OpenGL object handle
 		/// </summary>
 		public Handle<Texture> Handle { get; }
