@@ -30,7 +30,7 @@ namespace Zenseless.OpenTK
 			var bytes = image.GetPixelsUnsafe().ToArray();
 			var texture = new Texture2D(image.Width, image.Height, internalFormat)
 			{
-				Function = TextureWrapMode.ClampToEdge,
+				Function = TextureFunction.ClampToEdge,
 				MagFilter = TextureMagFilter.Linear,
 				MinFilter = TextureMinFilter.LinearMipmapLinear
 			};

@@ -38,9 +38,9 @@ namespace Zenseless.OpenTK
 		public Handle<Texture> Handle { get; }
 
 		/// <summary>
-		/// Set/get the texture function (wrap mode)
+		/// Set/get the texture function (wrap mode) for all dimensions.
 		/// </summary>
-		public TextureWrapMode Function
+		public TextureFunction Function
 		{
 			get => _function;
 			set
@@ -89,7 +89,7 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		protected override void DisposeResources() => GL.DeleteTexture(Handle);
 
-		private TextureWrapMode _function;
+		private TextureFunction _function;
 		private TextureMinFilter _minFilter;
 		private TextureMagFilter _magFilter;
 	}
