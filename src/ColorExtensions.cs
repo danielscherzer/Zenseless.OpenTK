@@ -10,7 +10,7 @@ namespace Zenseless.OpenTK
 	public static class ColorExtensions
 	{
 		/// <summary>
-		/// Convert a color string into a <seealso cref="Color"/>.
+		/// Convert a color string into a <seealso cref="Color4"/>.
 		/// Converts named colors like 'white', 'black, 'red'.
 		/// or hex strings like '#FFF', '#FFFF', '#FFFFFF' or with alpha '#FFFFFFFF'
 		/// </summary>

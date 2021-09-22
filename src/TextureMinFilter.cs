@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zenseless.OpenTK
+﻿namespace Zenseless.OpenTK
 {
+	/// <summary>
+	/// Contains the available filter modes for minification filtering of a texture
+	/// </summary>
 	public enum TextureMinFilter
 	{
 		/// <summary>

@@ -8,6 +8,18 @@ namespace Zenseless.OpenTK
 	public static class Box2Extensions
 	{
 		/// <summary>
+		/// Checks if <paramref name="a"/> contains <paramref name="b"/> including borders.
+		/// </summary>
+		/// <param name="a">The first box.</param>
+		/// <param name="b">The second box.</param>
+		/// <returns><c>true</c> if <paramref name="a"/> contains <paramref name="b"/></returns>
+		public static bool Contains(this Box2 a, Box2 b)
+		{
+			return a.Min.X <= b.Min.X && b.Max.X <= a.Max.X
+				&& a.Min.Y <= b.Min.Y && b.Max.Y <= a.Max.Y;
+		}
+
+		/// <summary>
 		/// Create a new instance of <see cref="Box2"/> from its center and a size vector
 		/// </summary>
 		/// <param name="center">The center.</param>
@@ -50,6 +62,20 @@ namespace Zenseless.OpenTK
 		/// <returns>A new instance of <see cref="Box2"/></returns>
 		public static Box2 CreateFromMinSize(float minX, float minY, float width, float height) => new(minX, minY, minX + width, minY + height);
 
+
+		/// <summary>
+		/// Checks if the two given boxes overlap
+		/// </summary>
+		/// <param name="a">The first box.</param>
+		/// <param name="b">The second box.</param>
+		/// <returns><c>true</c> if the two boxes do overlap.</returns>
+		public static bool Overlaps(this Box2 a, Box2 b)
+		{
+			bool noXoverlap = a.Max.X <= b.Min.X || a.Min.X >= b.Max.X;
+			bool noYoverlap = a.Max.Y <= b.Min.Y || a.Min.Y >= b.Max.Y;
+			return !(noXoverlap || noYoverlap);
+		}
+
 		/// <summary>
 		/// Return a translated <see cref="Box2"/>
 		/// </summary>
@@ -87,19 +113,6 @@ namespace Zenseless.OpenTK
 			}
 
 			return CreateFromMinSize(boxA.Min + directions[minId], boxA.Size);
-		}
-
-		/// <summary>
-		/// Checks if the two given boxes overlap
-		/// </summary>
-		/// <param name="a">The first box.</param>
-		/// <param name="b">The second box.</param>
-		/// <returns><c>true</c> if the two boxes do overlap.</returns>
-		public static bool Overlaps(this Box2 a, Box2 b)
-		{
-			bool noXoverlap = a.Max.X <= b.Min.X || a.Min.X >= b.Max.X;
-			bool noYoverlap = a.Max.Y <= b.Min.Y || a.Min.Y >= b.Max.Y;
-			return !(noXoverlap || noYoverlap);
 		}
 	}
 }

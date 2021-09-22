@@ -1,7 +1,7 @@
 ﻿namespace Zenseless.OpenTK
 {
 	/// <summary>
-	/// Magnification filter for texture mapping
+	/// Contains the available filter modes for magnification filtering of a texture
 	/// </summary>
 	public enum TextureMagFilter
 	{
