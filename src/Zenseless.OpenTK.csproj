@@ -32,6 +32,6 @@
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="8.3.2" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
-    <PackageReference Include="Zenseless.Patterns" Version="0.6.17" />
+    <PackageReference Include="Zenseless.Patterns" Version="0.6.18" />
   </ItemGroup>
 </Project>
