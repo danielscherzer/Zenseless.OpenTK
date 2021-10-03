@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Desktop;
 using System.Linq;
 
 namespace Zenseless.OpenTK.Tests
@@ -13,7 +14,7 @@ namespace Zenseless.OpenTK.Tests
 		{
 			const int res = 256;
 
-			static byte[] Execute()
+			static byte[] Execute(GameWindow window)
 			{
 				GL.ClearColor(Color4.Gray);
 				GL.Clear(ClearBufferMask.ColorBufferBit);

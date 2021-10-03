@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenTK.Windowing.Desktop;
 using System;
 
 namespace Zenseless.OpenTK.Tests
@@ -9,7 +10,7 @@ namespace Zenseless.OpenTK.Tests
 		[TestMethod()]
 		public void DebugOutputGLTest()
 		{
-			static int Execute()
+			static int Execute(GameWindow window)
 			{
 				DebugOutputGL _ = new();
 				return 0;

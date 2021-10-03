@@ -26,12 +26,12 @@ namespace Zenseless.OpenTK
 			GL.Enable(EnableCap.DebugOutput);
 			GL.Enable(EnableCap.DebugOutputSynchronous);
 			GL.DebugMessageCallback(_debugCallback, IntPtr.Zero);
-			switch(filterDebugSeverity)
+			switch (filterDebugSeverity)
 			{
-				case DebugSeverity.DebugSeverityHigh: 
-					_filter.Add(DebugSeverity.DebugSeverityHigh); 
+				case DebugSeverity.DebugSeverityHigh:
+					_filter.Add(DebugSeverity.DebugSeverityHigh);
 					break;
-				case DebugSeverity.DebugSeverityMedium: 
+				case DebugSeverity.DebugSeverityMedium:
 					_filter.Add(DebugSeverity.DebugSeverityHigh);
 					_filter.Add(DebugSeverity.DebugSeverityMedium);
 					break;
@@ -78,7 +78,7 @@ namespace Zenseless.OpenTK
 		{
 			if (!_filter.Contains(severity)) return;
 			var errorMessage = Marshal.PtrToStringAnsi(message, length);
-			DebugEvent?.Invoke(this, new DebugEventArgs(source, type, id, severity, errorMessage)); 
+			DebugEvent?.Invoke(this, new DebugEventArgs(source, type, id, severity, errorMessage));
 		}
 	}
 }

@@ -13,13 +13,13 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="width">The width of the viewport in pixel.</param>
 		/// <param name="height">The height of the viewport in pixel.</param>
-		internal void Resize(int width, int height)
+		public void Resize(int width, int height)
 		{
 			GL.Viewport(0, 0, width, height);
 			InvAspectRatio = height / (float)width;
 
 			var translate = Transformation2d.Translate(-1f, 1f);
-			var scale = Transformation2d.Scale(2f / width, -2f / height);
+			var scale = Transformation2d.Scale(2f / (width - 1), -2f / (height - 1));
 			InvViewportMatrix = scale * translate;
 		}
 

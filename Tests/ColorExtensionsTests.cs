@@ -18,7 +18,7 @@ namespace Zenseless.OpenTK.Tests
 		[DataRow(new float[] { 0f, 0f, 1f, 1f }, "blue")]
 		[DataRow(new float[] { 0f, 0f, 1f, 1f }, "#0000FF")]
 		[DataRow(new float[] { 1f, 1f, 1f, 0f }, "transparent")]
-		[DataRow(new float[]{ 1f, 1f, 1f, 1f}, "#FFFFFF")]
+		[DataRow(new float[] { 1f, 1f, 1f, 1f }, "#FFFFFF")]
 		public void FromHexCodeTest(float[] color, string hexColor)
 		{
 			Assert.AreEqual(color.ToColor4(), FromHexCode(hexColor));
