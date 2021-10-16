@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL4;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -75,7 +76,7 @@ namespace Zenseless.OpenTK
 		/// <exception cref="ShaderException"/>
 		public static ShaderProgram CompileLink(this ShaderProgram shaderProgram, IEnumerable<(ShaderType, string)> shaders)
 		{
-			var shaderId = new List<int>();
+			List<int> shaderId = new();
 			var unique = shaders.ToDictionary(data => data.Item1, data => data.Item2); // make sure each shader type is only present once
 			if (unique.Count < 1) throw new ShaderProgramException("Empty set of shaders for shader program");
 			foreach ((ShaderType type, string sourceCode) in unique)
@@ -84,10 +85,20 @@ namespace Zenseless.OpenTK
 				GL.AttachShader(shaderProgram.Handle, shader);
 				shaderId.Add(shader);
 			}
-			GL.LinkProgram(shaderProgram.Handle);
-			foreach (var shader in shaderId)
+			try
 			{
-				GL.DeleteShader(shader);
+				GL.LinkProgram(shaderProgram.Handle);
+			}
+			catch(Exception e)
+			{
+				throw new ShaderProgramException("Linker exception", e);
+			}
+			finally
+			{
+				foreach (var shader in shaderId)
+				{
+					GL.DeleteShader(shader);
+				}
 			}
 			var log = shaderProgram.GetShaderProgramLog();
 			if (!string.IsNullOrEmpty(log))
