@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Security;
 
 namespace Zenseless.OpenTK
 {
@@ -74,6 +76,8 @@ namespace Zenseless.OpenTK
 		/// <returns>The input shader program, but in a linked state.</returns>
 		/// <exception cref="ShaderProgramException"/>
 		/// <exception cref="ShaderException"/>
+		[HandleProcessCorruptedStateExceptions]
+		[SecurityCritical]
 		public static ShaderProgram CompileLink(this ShaderProgram shaderProgram, IEnumerable<(ShaderType, string)> shaders)
 		{
 			List<int> shaderId = new();
@@ -91,6 +95,7 @@ namespace Zenseless.OpenTK
 			}
 			catch(Exception e)
 			{
+				// INTEL drivers have some serious problems with some aspects of GLSL (NVIDA works)
 				throw new ShaderProgramException("Linker exception", e);
 			}
 			finally
