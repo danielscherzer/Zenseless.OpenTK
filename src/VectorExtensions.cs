@@ -59,6 +59,18 @@ namespace Zenseless.OpenTK
 		public static Vector2 CcwNormalTo(this in Vector2 v) => new(-v.Y, v.X);
 
 		/// <summary>
+		/// Limit the magnitude of a vector to a given threshold.
+		/// </summary>
+		/// <param name="v">The input vector.</param>
+		/// <param name="limit">The limit for the magnitude.</param>
+		/// <returns>A vector whit a magnitude less or equal to <paramref name="limit"/></returns>
+		public static Vector2 Limit(this in Vector2 v, float limit)
+		{
+			var length2 = v.LengthSquared;
+			return (length2 > limit * limit) ? v * limit / MathF.Sqrt(length2) : v;
+		}
+
+		/// <summary>
 		/// Normalizes each input uint from range [0,255] into float in range [0,1]
 		/// </summary>
 		/// <param name="x">input in range [0,255]</param>

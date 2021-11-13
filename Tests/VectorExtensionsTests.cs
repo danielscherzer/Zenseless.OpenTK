@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Zenseless.OpenTK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
 using System;
 
@@ -46,6 +47,18 @@ namespace Zenseless.OpenTK.Tests
 			var input = new Vector2((float)inputX, (float)inputY);
 			var expected = new Vector2((float)expectedX, (float)expectedY);
 			Assert.AreEqual(expected, VectorExtensions.ToPolar(input));
+		}
+
+		[DataTestMethod()]
+		[DataRow(0, 0, 0, 0, 0)]
+		[DataRow(1, 0, 3, 1, 0)]
+		[DataRow(2, 0, 1, 1, 0)]
+		[DataRow(0, 4, 2, 0, 2)]
+		public void LimitTest(double inputX, double inputY, double limit, double expectedX, double expectedY)
+		{
+			var input = new Vector2((float)inputX, (float)inputY);
+			var expected = new Vector2((float)expectedX, (float)expectedY);
+			Assert.AreEqual(expected, VectorExtensions.Limit(input, (float)limit));
 		}
 	}
 }
