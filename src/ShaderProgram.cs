@@ -13,7 +13,8 @@ namespace Zenseless.OpenTK
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ShaderProgram" /> class.
 		/// </summary>
-		public ShaderProgram() => Handle = new(GL.CreateProgram());
+		/// <exception cref="OpenGLException">When the program handle could not be created.</exception>
+		public ShaderProgram() => Handle = GL.CreateProgram().CreateValidHandle<ShaderProgram>();
 
 		/// <summary>
 		/// Returns the OpenGL object handle

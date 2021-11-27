@@ -12,10 +12,11 @@ namespace Zenseless.OpenTK
 		/// <summary>
 		/// Create a new vertex array object
 		/// </summary>
+		/// <exception cref="OpenGLException">When the program handle could not be created.</exception>
 		public VertexArray()
 		{
 			GL.CreateVertexArrays(1, out int handle);
-			Handle = new(handle);
+			Handle = handle.CreateValidHandle<VertexArray>();
 		}
 
 		/// <summary>

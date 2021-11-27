@@ -10,6 +10,7 @@ namespace Zenseless.OpenTK
 	/// Frame buffer class that handles rendering to texture(s).
 	/// </summary>
 	/// <seealso cref="Disposable" />
+	/// <exception cref="OpenGLException">When the program handle could not be created.</exception>
 	public class FrameBuffer : Disposable, IObjectHandle<FrameBuffer>
 	{
 		/// <summary>
@@ -22,7 +23,7 @@ namespace Zenseless.OpenTK
 		{
 			// Create an FBO object
 			GL.CreateFramebuffers(1, out int handle);
-			Handle = new(handle);
+			Handle = handle.CreateValidHandle<FrameBuffer>();
 			DisposesAttachments = disposesAttachments;
 		}
 

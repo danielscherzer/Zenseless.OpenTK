@@ -17,10 +17,11 @@ namespace Zenseless.OpenTK
 		/// Initializes a new instance of the <see cref="Texture" /> class.
 		/// </summary>
 		/// <param name="target">The texture target</param>
+		/// <exception cref="OpenGLException">When the program handle could not be created.</exception>
 		public Texture(TextureTarget target = TextureTarget.Texture2D)
 		{
 			GL.CreateTextures(target, 1, out int handle);
-			Handle = new(handle);
+			Handle = handle.CreateValidHandle<Texture>();
 			Target = target;
 		}
 

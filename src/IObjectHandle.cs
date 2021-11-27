@@ -6,11 +6,11 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// Interface for all OpenGL objects that can be accessed via handle
 	/// </summary>
-	public interface IObjectHandle<Type> : IDisposable
+	public interface IObjectHandle<TType> : IDisposable
 	{
 		/// <summary>
 		/// Returns the OpenGL object handle
 		/// </summary>
-		Handle<Type> Handle { get; }
+		Handle<TType> Handle { get; }
 	}
 }

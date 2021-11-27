@@ -6,9 +6,9 @@ namespace Zenseless.OpenTK
 	/// <summary>
 	/// The exception class for shader programs.
 	/// </summary>
-	/// <seealso cref="Exception" />
+	/// <seealso cref="OpenGLException" />
 	[Serializable]
-	public class ShaderProgramException : Exception
+	public class ShaderProgramException : OpenGLException
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ShaderProgramException"/> class.

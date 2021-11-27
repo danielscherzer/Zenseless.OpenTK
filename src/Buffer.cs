@@ -14,10 +14,11 @@ namespace Zenseless.OpenTK
 		/// <summary>
 		/// Constructs a new OpenGL buffer object.
 		/// </summary>
+		/// <exception cref="OpenGLException">When the program handle could not be created.</exception>
 		public Buffer()
 		{
 			GL.CreateBuffers(1, out int handle);
-			Handle = new(handle);
+			Handle = handle.CreateValidHandle<Buffer>();
 		}
 
 		/// <summary>
