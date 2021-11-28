@@ -1,5 +1,4 @@
-﻿using Zenseless.OpenTK;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
 using System;
 

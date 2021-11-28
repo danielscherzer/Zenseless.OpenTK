@@ -31,9 +31,33 @@ namespace Zenseless.OpenTK
 		/// <param name="min">lower limit</param>
 		/// <param name="max">upper limit</param>
 		/// <returns>clamped version of v</returns>
+		public static Vector2 Clamp(this in Vector2 v, float min, float max)
+		{
+			return new Vector2(v.X.Clamp(min, max), v.Y.Clamp(min, max));
+		}
+
+		/// <summary>
+		/// Clamp each component of the input vector v in between min and max. 
+		/// </summary>
+		/// <param name="v">input vector that will be clamped component-wise</param>
+		/// <param name="min">lower limit</param>
+		/// <param name="max">upper limit</param>
+		/// <returns>clamped version of v</returns>
 		public static Vector3 Clamp(this in Vector3 v, float min, float max)
 		{
 			return new Vector3(v.X.Clamp(min, max), v.Y.Clamp(min, max), v.Z.Clamp(min, max));
+		}
+
+		/// <summary>
+		/// Clamp each component of the input vector v in between min and max. 
+		/// </summary>
+		/// <param name="v">input vector that will be clamped component-wise</param>
+		/// <param name="min">lower limit</param>
+		/// <param name="max">upper limit</param>
+		/// <returns>clamped version of v</returns>
+		public static Vector4 Clamp(this in Vector4 v, float min, float max)
+		{
+			return new Vector4(v.X.Clamp(min, max), v.Y.Clamp(min, max), v.Z.Clamp(min, max), v.W.Clamp(min, max));
 		}
 
 		/// <summary>

@@ -93,7 +93,7 @@ namespace Zenseless.OpenTK
 			{
 				GL.LinkProgram(shaderProgram.Handle);
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				// INTEL drivers have some serious problems with some aspects of GLSL (NVIDA works)
 				throw new ShaderProgramException("Linker exception", e);
