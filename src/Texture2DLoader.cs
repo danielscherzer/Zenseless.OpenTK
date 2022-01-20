@@ -34,7 +34,7 @@ namespace Zenseless.OpenTK
 				MagFilter = TextureMagFilter.Linear,
 				MinFilter = TextureMinFilter.LinearMipmapLinear
 			};
-
+			GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1); // some image sizes will cause memory acceptions otherwise
 			GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, bytes);
 			GL.GenerateTextureMipmap(texture.Handle);
 			return texture;
