@@ -21,7 +21,7 @@ namespace Zenseless.OpenTK
 		public Texture(TextureTarget target = TextureTarget.Texture2D)
 		{
 			GL.CreateTextures(target, 1, out int handle);
-			Handle = handle.CreateValidHandle<Texture>();
+			Handle = handle.CheckValidHandle<Texture>();
 			Target = target;
 		}
 

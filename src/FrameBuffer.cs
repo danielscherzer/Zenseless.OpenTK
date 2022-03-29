@@ -23,7 +23,7 @@ namespace Zenseless.OpenTK
 		{
 			// Create an FBO object
 			GL.CreateFramebuffers(1, out int handle);
-			Handle = handle.CreateValidHandle<FrameBuffer>();
+			Handle = handle.CheckValidHandle<FrameBuffer>();
 			DisposesAttachments = disposesAttachments;
 		}
 

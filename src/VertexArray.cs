@@ -16,7 +16,7 @@ namespace Zenseless.OpenTK
 		public VertexArray()
 		{
 			GL.CreateVertexArrays(1, out int handle);
-			Handle = handle.CreateValidHandle<VertexArray>();
+			Handle = handle.CheckValidHandle<VertexArray>();
 		}
 
 		/// <summary>

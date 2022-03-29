@@ -46,6 +46,24 @@ namespace Zenseless.OpenTK
 		}
 
 		/// <summary>
+		/// Mixes (linearly interpolates) two colors.
+		/// If <paramref name="weight"/> == 0 <paramref name="colorA"/> is returned
+		/// If <paramref name="weight"/> == 1 <paramref name="colorB"/> is returned
+		/// </summary>
+		/// <param name="colorA">The first input color.</param>
+		/// <param name="colorB">The second input color.</param>
+		/// <param name="weight">The weight [0,1].</param>
+		/// <returns></returns>
+		public static Color4 Mix(Color4 colorA, Color4 colorB, float weight)
+		{
+			float r = MathHelper.Lerp(colorA.R, colorB.R, weight);
+			float g = MathHelper.Lerp(colorA.G, colorB.G, weight);
+			float b = MathHelper.Lerp(colorA.B, colorB.B, weight);
+			float a = MathHelper.Lerp(colorA.A, colorB.A, weight);
+			return new(r, g, b, a);
+		}
+
+		/// <summary>
 		/// Converts a float array into a <see cref="Color4"/>
 		/// </summary>
 		/// <param name="color">The input float array to convert.</param>

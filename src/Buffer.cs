@@ -18,7 +18,7 @@ namespace Zenseless.OpenTK
 		public Buffer()
 		{
 			GL.CreateBuffers(1, out int handle);
-			Handle = handle.CreateValidHandle<Buffer>();
+			Handle = handle.CheckValidHandle<Buffer>();
 		}
 
 		/// <summary>

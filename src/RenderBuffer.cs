@@ -19,7 +19,7 @@ namespace Zenseless.OpenTK
 		public RenderBuffer(RenderbufferStorage type, int width, int height)
 		{
 			GL.CreateRenderbuffers(1, out int handle);
-			Handle = handle.CreateValidHandle<RenderBuffer>();
+			Handle = handle.CheckValidHandle<RenderBuffer>();
 			GL.NamedRenderbufferStorage(handle, type, width, height);
 		}
 

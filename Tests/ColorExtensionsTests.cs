@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenTK.Mathematics;
 using static Zenseless.OpenTK.ColorExtensions;
 
 namespace Zenseless.OpenTK.Tests
@@ -33,6 +34,17 @@ namespace Zenseless.OpenTK.Tests
 			Assert.AreEqual(input[1], color.G);
 			Assert.AreEqual(input[2], color.B);
 			Assert.AreEqual(input[3], color.A);
+		}
+
+		[TestMethod()]
+		public void MixTest()
+		{
+			Assert.AreEqual(Color4.Red, Mix(Color4.Red, Color4.Black, 0f));
+			Assert.AreEqual(Color4.Black, Mix(Color4.Red, Color4.Black, 1f));
+
+			var result = Mix(Color4.White, Color4.Black, 0.5f);
+			var gray = new Color4(0.5f, 0.5f, 0.5f, 1f);
+			Assert.AreEqual(gray, result);
 		}
 	}
 }
