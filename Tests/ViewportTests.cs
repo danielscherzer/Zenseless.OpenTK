@@ -7,7 +7,7 @@ namespace Zenseless.OpenTK.Tests
 	public class ViewportTests
 	{
 
-		[DataTestMethod()]
+		[DataTestMethod(), TestCategory("OpenGL")]
 		[DataRow(512, 512, 1f)]
 		[DataRow(1024, 512, 0.5f)]
 		public void InvAspectRatioTest(int width, int height, float invAspect)
@@ -21,7 +21,7 @@ namespace Zenseless.OpenTK.Tests
 			});
 		}
 
-		[TestMethod()]
+		[DataTestMethod(), TestCategory("OpenGL")]
 		public void InvViewportMatrixTest()
 		{
 			Viewport viewport = new();

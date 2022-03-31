@@ -7,7 +7,7 @@ namespace Zenseless.OpenTK.Tests
 	[TestClass()]
 	public class Texture2DLoaderTests
 	{
-		[TestMethod()]
+		[TestMethod(), TestCategory("OpenGL")]
 		public void LoadPngTest()
 		{
 			EmbeddedResourceDirectory resourceDirectory = new("Zenseless.OpenTK.Tests.Content");
@@ -24,7 +24,7 @@ namespace Zenseless.OpenTK.Tests
 			});
 		}
 
-		[TestMethod()]
+		[TestMethod(), TestCategory("OpenGL")]
 		public void LoadJpgTest()
 		{
 			EmbeddedResourceDirectory resourceDirectory = new("Zenseless.OpenTK.Tests.Content");

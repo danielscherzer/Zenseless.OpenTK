@@ -17,7 +17,8 @@ image: Visual Studio 2019
 test:
   # only categories to test
   categories:
-    - A
+    except:
+    - OpenGL
 
 install:
   # Install OpenGL

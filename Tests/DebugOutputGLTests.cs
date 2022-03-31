@@ -7,7 +7,7 @@ namespace Zenseless.OpenTK.Tests
 	[TestClass()]
 	public class DebugOutputGLTests
 	{
-		[TestMethod()]
+		[TestMethod(), TestCategory("OpenGL")]
 		public void DebugOutputGLTest()
 		{
 			static int Execute(GameWindow window)

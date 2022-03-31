@@ -9,7 +9,7 @@ namespace Zenseless.OpenTK.Tests
 	[TestClass()]
 	public class FrameBufferHelperTests
 	{
-		[TestMethod()]
+		[TestMethod(), TestCategory("OpenGL")]
 		public void ToByteArrayTest()
 		{
 			const int res = 256;
