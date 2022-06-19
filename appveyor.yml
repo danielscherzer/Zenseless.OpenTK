@@ -1,6 +1,6 @@
 version: 0.1.{build}
 
-skip_tags: true # avoid deploy to GitHub loop 
+skip_tags: true # avoid deploy to GitHub loop
 
 # enable patching of dot net core/standard *.csproj files with APPVEYOR version
 dotnet_csproj:
@@ -12,7 +12,7 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 
-image: Visual Studio 2019
+image: Visual Studio 2022
 
 test:
   # only categories to test
