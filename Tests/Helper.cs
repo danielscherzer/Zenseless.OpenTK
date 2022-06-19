@@ -9,6 +9,7 @@ namespace Zenseless.OpenTK.Tests
 	{
 		internal static T ExecuteOnOpenGL<T>(Func<GameWindow, T> action, Version apiVersion, ContextFlags flags = ContextFlags.Debug, int width = 256, int height = 256)
 		{
+			GLFWProvider.CheckForMainThread = false; // https://github.com/opentk/opentk/issues/1206
 			var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings
 			{
 				Flags = flags,
