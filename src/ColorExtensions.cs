@@ -15,11 +15,18 @@ namespace Zenseless.OpenTK
 		/// or hex strings like '#FFF', '#FFFF', '#FFFFFF' or with alpha '#FFFFFFFF'
 		/// </summary>
 		/// <param name="hexColor"></param>
-		/// <returns></returns>
+		/// <returns><see cref="Color4.White"/> if convertion was not possible.</returns>
 		public static Color4 FromHexCode(string hexColor)
 		{
-			var sysColor = (System.Drawing.Color)_converter.ConvertFromString(hexColor);
-			return new Color4(sysColor.R, sysColor.G, sysColor.B, sysColor.A);
+			if(_converter.ConvertFromString(hexColor) is System.Drawing.Color sysColor)
+			{
+				return new Color4(sysColor.R, sysColor.G, sysColor.B, sysColor.A);
+
+			}
+			else
+			{
+				return Color4.White;
+			}
 		}
 
 		/// <summary>

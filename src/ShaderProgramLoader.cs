@@ -76,8 +76,8 @@ namespace Zenseless.OpenTK
 		/// <returns>The input shader program, but in a linked state.</returns>
 		/// <exception cref="ShaderProgramException"/>
 		/// <exception cref="ShaderException"/>
-		[HandleProcessCorruptedStateExceptions]
-		[SecurityCritical]
+		//[HandleProcessCorruptedStateExceptions]
+		//[SecurityCritical]
 		public static ShaderProgram CompileLink(this ShaderProgram shaderProgram, IEnumerable<(ShaderType, string)> shaders)
 		{
 			List<int> shaderId = new();
