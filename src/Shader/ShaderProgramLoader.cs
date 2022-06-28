@@ -27,6 +27,7 @@ namespace Zenseless.OpenTK
 			var log = GetShaderLog(handle);
 			if (!string.IsNullOrEmpty(log))
 			{
+				GL.DeleteShader(handle);
 				throw new ShaderException(shaderType, log);
 			}
 			return handle;
@@ -112,5 +113,17 @@ namespace Zenseless.OpenTK
 			}
 			return shaderProgram;
 		}
+
+		/// <summary>
+		/// Compile shaders and link a shader program from a list of shader sources.
+		/// </summary>
+		/// <param name="shaderProgram">The shader program to link the shaders to.</param>
+		/// <param name="shaders">A list of shader types and sources</param>
+		/// <returns>The input shader program, but in a linked state.</returns>
+		/// <exception cref="ShaderProgramException"/>
+		/// <exception cref="ShaderException"/>
+		//[HandleProcessCorruptedStateExceptions]
+		//[SecurityCritical]
+		public static ShaderProgram CompileLink(this ShaderProgram shaderProgram, params (ShaderType, string)[] shaders) => shaderProgram.CompileLink(shaders as IEnumerable<(ShaderType, string)>);
 	}
 }
