@@ -7,14 +7,14 @@ namespace Zenseless.OpenTK.Tests
 {
 	internal class Helper
 	{
-		internal static T ExecuteOnOpenGL<T>(Func<GameWindow, T> action, Version apiVersion, ContextFlags flags = ContextFlags.Debug, int width = 256, int height = 256)
+		internal static T ExecuteOnOpenGL<T>(Func<GameWindow, T> action, Version apiVersion, int width = 256, int height = 256, ContextProfile profile = ContextProfile.Core)
 		{
 			GLFWProvider.CheckForMainThread = false; // https://github.com/opentk/opentk/issues/1206
 			var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings
 			{
-				Flags = flags,
+				Flags = ContextFlags.Debug,
 				APIVersion = apiVersion,
-				Profile = ContextProfile.Core,
+				Profile = profile,
 				StartVisible = false
 			})
 			{
@@ -27,6 +27,6 @@ namespace Zenseless.OpenTK.Tests
 			return result;
 		}
 		internal static T ExecuteOnOpenGL<T>(Func<GameWindow, T> action) => ExecuteOnOpenGL(action, new Version(4, 5));
-		internal static T ExecuteOnOpenGL<T>(int width, int height, Func<GameWindow, T> action) => ExecuteOnOpenGL(action, new Version(4, 5), ContextFlags.Debug, width, height);
+		internal static T ExecuteOnOpenGL<T>(int width, int height, Func<GameWindow, T> action) => ExecuteOnOpenGL(action, new Version(4, 5), width, height);
 	}
 }

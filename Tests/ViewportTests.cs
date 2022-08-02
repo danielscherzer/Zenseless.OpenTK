@@ -21,7 +21,7 @@ namespace Zenseless.OpenTK.Tests
 			});
 		}
 
-		[DataTestMethod(), TestCategory("OpenGL")]
+		[TestMethod(), TestCategory("OpenGL")]
 		public void InvViewportMatrixTest()
 		{
 			Viewport viewport = new();
