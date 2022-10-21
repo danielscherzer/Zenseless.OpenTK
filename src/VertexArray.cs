@@ -52,9 +52,10 @@ namespace Zenseless.OpenTK
 		/// <param name="perInstance">Is this attribute per instance</param>
 		/// <param name="normalized">Should the input data be normalized</param>
 		/// <param name="offset">Offset into the buffer</param>
-		public void BindAttribute(int attributeLocation, Buffer buffer, int baseTypeCount, int stride, VertexAttribType type, bool perInstance = false, bool normalized = false, int offset = 0)
+		/// <returns><c>true</c> if successfull, <c>false</c> if the attribute location is invalid</returns>
+		public bool BindAttribute(int attributeLocation, Buffer buffer, int baseTypeCount, int stride, VertexAttribType type, bool perInstance = false, bool normalized = false, int offset = 0)
 		{
-			if (-1 == attributeLocation) throw new ArgumentException("Invalid attribute location");
+			if (-1 == attributeLocation) return false;
 			GL.EnableVertexArrayAttrib(Handle, attributeLocation);
 			GL.VertexArrayVertexBuffer(Handle, attributeLocation, buffer.Handle, new IntPtr(offset), stride);
 			GL.VertexArrayAttribBinding(Handle, attributeLocation, attributeLocation);
@@ -63,6 +64,7 @@ namespace Zenseless.OpenTK
 			{
 				GL.VertexArrayBindingDivisor(Handle, attributeLocation, 1);
 			}
+			return true;
 		}
 
 		/// <summary>
