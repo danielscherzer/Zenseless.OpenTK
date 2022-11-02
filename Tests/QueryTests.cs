@@ -27,7 +27,7 @@ namespace Zenseless.OpenTK.Tests
 				queryB.End();
 				Assert.AreEqual(0, queryB.Result);
 				return 0;
-			}, new Version(3, 3), 512, 512, ContextProfile.Compatability); //TODO: Make test run in Core profile
+			}, new Version(4, 3), 512, 512, ContextProfile.Compatability); //TODO: Make test run in Core profile
 		}
 
 		private static void DrawBox(float minX, float minY, float maxX, float maxY, float depth)
