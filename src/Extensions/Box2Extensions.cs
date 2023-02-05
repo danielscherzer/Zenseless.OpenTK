@@ -8,6 +8,30 @@ namespace Zenseless.OpenTK
 	public static class Box2Extensions
 	{
 		/// <summary>
+		/// Create a box that is at least size with x height, but has aspect ratio newWidth2heigth
+		/// </summary>
+		/// <param name="width">minimal width</param>
+		/// <param name="height">minimal height</param>
+		/// <param name="aspect">new aspect ratio</param>
+		/// <returns>A box that is at least size with x height, but has aspect ratio newWidth2heigth</returns>
+		public static Box2 CreateContainingBox(float width, float height, float aspect)
+		{
+			float boxAspect = width / height;
+			if(aspect < boxAspect) // check if landscape
+			{
+				float outputHeight = width / aspect;
+				return CreateFromMinSize(0f, (height - outputHeight) * 0.5f, width, outputHeight);
+
+			}
+			else
+			{
+				float outputWidth = height * aspect;
+				return CreateFromMinSize((width - outputWidth) * 0.5f, 0f, outputWidth, (float)height);
+
+			}
+		}
+
+		/// <summary>
 		/// Checks if <paramref name="a"/> contains <paramref name="b"/> including borders.
 		/// </summary>
 		/// <param name="a">The first box.</param>

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <DocumentationFile>bin/Zenseless.OpenTK.xml</DocumentationFile>
   </PropertyGroup>
@@ -30,8 +30,8 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="12.2.1" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="12.2.2" />
     <PackageReference Include="OpenTK" Version="4.7.5" />
-    <PackageReference Include="Zenseless.Patterns" Version="0.6.21" />
+    <PackageReference Include="Zenseless.Patterns" Version="0.6.28" />
   </ItemGroup>
 </Project>
