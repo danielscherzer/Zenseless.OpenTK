@@ -13,19 +13,21 @@ public static class Texture2DLoader
 	/// Load a texture from the given stream.
 	/// </summary>
 	/// <param name="stream">A stream containing an image.</param>
+	/// <param name="mipMap">Are mipmaps created.</param>
 	/// <returns>A Texture.</returns>
-	public static Texture2D Load(Stream stream)
+	public static Texture2D Load(Stream stream, bool mipMap = true)
 	{
 		using var image = new MagickImage(stream);
-		return Load(image);
+		return Load(image, mipMap);
 	}
 
 	/// <summary>
 	/// Load a texture from the given <seealso cref="MagickImage"/>.
 	/// </summary>
 	/// <param name="image">A <seealso cref="MagickImage"/>.</param>
+	/// <param name="mipMap">Are mipmaps created.</param>
 	/// <returns>A Texture.</returns>
-	public static Texture2D Load(MagickImage image)
+	public static Texture2D Load(MagickImage image, bool mipMap = true)
 	{
 		var format = PixelFormat.Rgb;
 		var internalFormat = SizedInternalFormat.Rgb8;
@@ -42,11 +44,11 @@ public static class Texture2DLoader
 		{
 			Function = TextureFunction.ClampToEdge,
 			MagFilter = TextureMagFilter.Linear,
-			MinFilter = TextureMinFilter.LinearMipmapLinear
+			MinFilter = mipMap ? TextureMinFilter.LinearMipmapLinear : TextureMinFilter.Linear
 		};
 		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1); // some image sizes will cause memory acceptions otherwise
 		GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, bytes);
-		GL.GenerateTextureMipmap(texture.Handle);
+		if(mipMap) GL.GenerateTextureMipmap(texture.Handle);
 		return texture;
 	}
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Zenseless.Patterns;
+using static OpenTK.Graphics.OpenGL.GL;
 
 namespace Zenseless.OpenTK
 {
@@ -18,10 +19,10 @@ namespace Zenseless.OpenTK
 		public DebugOutputGL(DebugSeverity filterDebugSeverity = DebugSeverity.DebugSeverityLow)
 		{
 			Version version = new(GL.GetInteger(GetPName.MajorVersion), GL.GetInteger(GetPName.MinorVersion));
-			if (version < new Version(4, 3)) throw new Exception("OpenGL version too low for debug output. Use glError instead.");
+			if (version < new Version(4, 3)) throw new OpenGLException("OpenGL version too low for debug output. Use glError instead.");
 			ContextFlagMask flags = (ContextFlagMask)GL.GetInteger(GetPName.ContextFlags);
 			var debugFlag = ContextFlagMask.ContextFlagDebugBit & flags;
-			if (0 == debugFlag) throw new Exception("OpenGL context is not in debug mode.");
+			if (0 == debugFlag) throw new OpenGLException("OpenGL context is not in debug mode.");
 			_debugCallback = DebugCallback; //need to keep an instance, otherwise delegate is garbage collected
 			GL.Enable(EnableCap.DebugOutput);
 			GL.Enable(EnableCap.DebugOutputSynchronous);
@@ -78,7 +79,15 @@ namespace Zenseless.OpenTK
 		{
 			if (!_filter.Contains(severity)) return;
 			var errorMessage = Marshal.PtrToStringAnsi(message, length);
-			DebugEvent?.Invoke(this, new DebugEventArgs(source, type, id, severity, errorMessage));
+			DebugEventArgs e = new(source, type, id, severity, errorMessage);
+			if(DebugEvent is null)
+			{
+				throw new OpenGLException($"[{e.Severity}, {e.Id}]: {e.Message} [Type:{e.Type}] from [{e.Source}]");
+			}
+			else
+			{
+				DebugEvent.Invoke(this, e);
+			}
 		}
 	}
 }
