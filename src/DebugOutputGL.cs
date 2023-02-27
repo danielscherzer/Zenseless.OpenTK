@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Zenseless.Patterns;
-using static OpenTK.Graphics.OpenGL.GL;
 
 namespace Zenseless.OpenTK
 {
