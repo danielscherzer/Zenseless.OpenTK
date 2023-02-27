@@ -1,6 +1,7 @@
 ﻿using ImageMagick;
 using OpenTK.Graphics.OpenGL4;
 using System.IO;
+using System.Linq;
 
 namespace Zenseless.OpenTK;
 
@@ -31,8 +32,10 @@ public static class Texture2DLoader
 	{
 		var format = PixelFormat.Rgb;
 		var internalFormat = SizedInternalFormat.Rgb8;
-		switch (image.ChannelCount)
+		var channelCount = image.Channels.Count();
+		switch (channelCount)
 		{
+			case 1: format = PixelFormat.Red; internalFormat = SizedInternalFormat.R8; break;
 			case 2: format = PixelFormat.Rg; internalFormat = SizedInternalFormat.Rg8; break;
 			case 3: break;
 			case 4: format = PixelFormat.Rgba; internalFormat = SizedInternalFormat.Rgba8; break;
