@@ -36,7 +36,7 @@ public static class Texture2DLoader
 			case 2: format = PixelFormat.Rg; internalFormat = SizedInternalFormat.Rg8; break;
 			case 3: break;
 			case 4: format = PixelFormat.Rgba; internalFormat = SizedInternalFormat.Rgba8; break;
-			default: throw new InvalidDataException("Unexpected image format");
+			default: throw new InvalidDataException($"Unexpected image format with {image.ChannelCount} channels");
 		}
 		image.Flip();
 		var bytes = image.GetPixelsUnsafe().ToArray();
