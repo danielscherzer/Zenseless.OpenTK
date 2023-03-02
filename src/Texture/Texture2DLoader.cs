@@ -18,6 +18,7 @@ public static class Texture2DLoader
 	/// <returns>A Texture.</returns>
 	public static Texture2D Load(Stream stream, bool mipMap = true)
 	{
+		//TODO: Try out alternatives to magickimage
 		using var image = new MagickImage(stream);
 		return Load(image, mipMap);
 	}
@@ -30,19 +31,12 @@ public static class Texture2DLoader
 	/// <returns>A Texture.</returns>
 	public static Texture2D Load(MagickImage image, bool mipMap = true)
 	{
-		var format = PixelFormat.Rgb;
-		var internalFormat = SizedInternalFormat.Rgb8;
-		var channelCount = image.Channels.Count();
-		switch (channelCount)
-		{
-			case 1: format = PixelFormat.Red; internalFormat = SizedInternalFormat.R8; break;
-			case 2: format = PixelFormat.Rg; internalFormat = SizedInternalFormat.Rg8; break;
-			case 3: break;
-			case 4: format = PixelFormat.Rgba; internalFormat = SizedInternalFormat.Rgba8; break;
-			default: throw new InvalidDataException($"Unexpected image format with {image.ChannelCount} channels");
-		}
+		var channelCount = (byte)image.Channels.Count(); // do not use image.ChannelCount
+		var format = TextureExtensions.PixelFormatFromColorChannels(channelCount);
+		var internalFormat = TextureExtensions.InternalFormatFromColorChannels(channelCount);
+
 		image.Flip();
-		var bytes = image.GetPixelsUnsafe().ToArray();
+		var pixels = image.GetPixelsUnsafe().GetAreaPointer(0, 0, image.Width, image.Height);
 		var texture = new Texture2D(image.Width, image.Height, internalFormat)
 		{
 			Function = TextureFunction.ClampToEdge,
@@ -50,7 +44,7 @@ public static class Texture2DLoader
 			MinFilter = mipMap ? TextureMinFilter.LinearMipmapLinear : TextureMinFilter.Linear
 		};
 		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1); // some image sizes will cause memory acceptions otherwise
-		GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, bytes);
+		GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, pixels);
 		if(mipMap) GL.GenerateTextureMipmap(texture.Handle);
 		return texture;
 	}

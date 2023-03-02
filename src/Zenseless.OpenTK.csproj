@@ -3,7 +3,9 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <DocumentationFile>bin/Zenseless.OpenTK.xml</DocumentationFile>
+    <PublishDocumentationFile>true</PublishDocumentationFile>
+    <DocumentationFile>bin/Zenseless.Patterns.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -20,6 +22,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <!-- Include symbol files (*.pdb) in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <!--<IncludeSymbols>true</IncludeSymbols>-->
+    <!--<SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -32,6 +38,6 @@
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="12.3.0" />
     <PackageReference Include="OpenTK" Version="4.7.5" />
-    <PackageReference Include="Zenseless.Patterns" Version="0.6.28" />
+    <PackageReference Include="Zenseless.Patterns" Version="0.6.30" />
   </ItemGroup>
 </Project>
