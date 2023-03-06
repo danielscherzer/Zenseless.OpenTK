@@ -1,6 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using System;
-using System.Linq;
 using System.Numerics;
 using Zenseless.Patterns;
 
@@ -101,7 +100,7 @@ namespace Zenseless.OpenTK
 			//TODO: Add test code
 			// warning Matrix4x4 has a weird order of its cells
 			float[] buffer = new float[16 * value.Length];
-			for(int i = 0; i < value.Length; i++)
+			for (int i = 0; i < value.Length; i++)
 			{
 				var m = value[i].ToArray();
 				Array.Copy(m, 0, buffer, i * 16, 16);

@@ -79,7 +79,7 @@ namespace Zenseless.OpenTK
 			if (!_filter.Contains(severity)) return;
 			var errorMessage = Marshal.PtrToStringAnsi(message, length);
 			DebugEventArgs e = new(source, type, id, severity, errorMessage);
-			if(DebugEvent is null)
+			if (DebugEvent is null)
 			{
 				throw new OpenGLException($"[{e.Severity}, {e.Id}]: {e.Message} [Type:{e.Type}] from [{e.Source}]");
 			}

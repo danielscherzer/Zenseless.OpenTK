@@ -18,7 +18,7 @@ namespace Zenseless.OpenTK
 		/// <returns><see cref="Color4.White"/> if convertion was not possible.</returns>
 		public static Color4 FromHexCode(string hexColor)
 		{
-			if(_converter.ConvertFromString(hexColor) is System.Drawing.Color sysColor)
+			if (_converter.ConvertFromString(hexColor) is System.Drawing.Color sysColor)
 			{
 				return new Color4(sysColor.R, sysColor.G, sysColor.B, sysColor.A);
 

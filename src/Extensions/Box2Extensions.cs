@@ -17,7 +17,7 @@ namespace Zenseless.OpenTK
 		public static Box2 CreateContainingBox(float width, float height, float aspect)
 		{
 			float boxAspect = width / height;
-			if(aspect < boxAspect) // check if landscape
+			if (aspect < boxAspect) // check if landscape
 			{
 				float outputHeight = width / aspect;
 				return CreateFromMinSize(0f, (height - outputHeight) * 0.5f, width, outputHeight);

@@ -104,7 +104,7 @@ namespace Zenseless.OpenTK
 		/// <param name="location">The uniforms location.</param>
 		/// <param name="value">The new value to set.</param>
 		public static void Uniform(this ShaderProgram shaderProgram, int location, Matrix4[] value)
-		{ 
+		{
 			GL.ProgramUniformMatrix4(shaderProgram.Handle, location, value.Length, false, value.ToFloatArray());
 		}
 

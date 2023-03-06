@@ -1,7 +1,6 @@
 ﻿using ImageMagick;
 using OpenTK.Graphics.OpenGL4;
 using System.IO;
-using System.Linq;
 
 namespace Zenseless.OpenTK;
 using static SizedInternalFormat;
@@ -34,7 +33,7 @@ public static class Texture2DLoader
 	{
 		image.Flip();
 		SizedInternalFormat internalFormat = Rgb8; // default rgb
-		switch(image.ColorType)
+		switch (image.ColorType)
 		{
 			case ColorType.TrueColorAlpha: internalFormat = Rgba8; break;
 			case ColorType.Grayscale: internalFormat = R8; image.Grayscale(); break;
@@ -53,7 +52,7 @@ public static class Texture2DLoader
 		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1); // some image sizes will cause memory acceptions otherwise
 		GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, pixels);
 
-		if(mipMap) GL.GenerateTextureMipmap(texture.Handle);
+		if (mipMap) GL.GenerateTextureMipmap(texture.Handle);
 
 		return texture;
 	}

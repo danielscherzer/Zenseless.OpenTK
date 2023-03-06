@@ -1,5 +1,5 @@
-﻿using Zenseless.Patterns;
-using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL4;
+using Zenseless.Patterns;
 
 namespace Zenseless.OpenTK
 {

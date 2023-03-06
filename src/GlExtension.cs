@@ -18,7 +18,7 @@ namespace Zenseless.OpenTK
 		{
 			get
 			{
-				if(0 == _extensions.Count) UpdateExtensions();
+				if (0 == _extensions.Count) UpdateExtensions();
 				return _extensions;
 			}
 		}

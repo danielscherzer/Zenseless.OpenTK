@@ -15,7 +15,6 @@ namespace Zenseless.OpenTK
 		/// <param name="height">the height of the texture in texels</param>
 		/// <param name="format">the internal format of the texture</param>
 		/// <param name="levels">the number of mip map levels to store in the texture. If -1 is given the complete of list of mipmap levels is assumed.</param>
-		/// <param name="target">The texture target</param>
 		/// <exception cref="OpenGLException">When the program handle could not be created.</exception>
 		public Texture2D(int width, int height, SizedInternalFormat format = SizedInternalFormat.Rgba8, int levels = -1) : base(TextureTarget.Texture2D)
 		{
