@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 
 namespace Zenseless.OpenTK;
+using static SizedInternalFormat;
 
 /// <summary>
 /// Class for loading textures from images
@@ -31,12 +32,15 @@ public static class Texture2DLoader
 	/// <returns>A Texture.</returns>
 	public static Texture2D Load(MagickImage image, bool mipMap = true)
 	{
-		var channelCount = (byte)image.Channels.Count(); // do not use image.ChannelCount
-		var format = TextureExtensions.PixelFormatFromColorChannels(channelCount);
-		var internalFormat = TextureExtensions.InternalFormatFromColorChannels(channelCount);
-
 		image.Flip();
-		if (1 == channelCount) image.Grayscale();
+		SizedInternalFormat internalFormat = Rgb8; // default rgb
+		switch(image.ColorType)
+		{
+			case ColorType.TrueColorAlpha: internalFormat = Rgba8; break;
+			case ColorType.Grayscale: internalFormat = R8; image.Grayscale(); break;
+			case ColorType.PaletteAlpha: internalFormat = Rgba8; image.ColorType = ColorType.TrueColor; break;
+			case ColorType.Palette: image.ColorType = ColorType.TrueColorAlpha; break;
+		}
 		var pixels = image.GetPixelsUnsafe().GetAreaPointer(0, 0, image.Width, image.Height);
 		var texture = new Texture2D(image.Width, image.Height, internalFormat)
 		{
@@ -44,9 +48,13 @@ public static class Texture2DLoader
 			MagFilter = TextureMagFilter.Linear,
 			MinFilter = mipMap ? TextureMinFilter.LinearMipmapLinear : TextureMinFilter.Linear
 		};
+
+		var format = TextureExtensions.PixelFormatFrom(internalFormat);
 		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1); // some image sizes will cause memory acceptions otherwise
 		GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, pixels);
+
 		if(mipMap) GL.GenerateTextureMipmap(texture.Handle);
+
 		return texture;
 	}
 }

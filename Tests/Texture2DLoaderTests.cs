@@ -1,7 +1,6 @@
 ﻿using ImageMagick;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Graphics.OpenGL4;
-using System.Linq;
 using Zenseless.Resources;
 
 namespace Zenseless.OpenTK.Tests;
@@ -13,9 +12,10 @@ public class Texture2DLoaderTests
 	[DataRow("test.jpg", 335, 1024, SizedInternalFormat.Rgb8)]
 	[DataRow("roughness.png", 1024, 1024, SizedInternalFormat.R8)]
 	[DataRow("grass.png", 320, 224, SizedInternalFormat.Rgba8)]
+	[DataRow("grass32.png", 320, 224, SizedInternalFormat.Rgba8)]
 	public void LoadJpgTest(string name, int width, int height, SizedInternalFormat expectedFormat)
 	{
-		EmbeddedResourceDirectory resourceDirectory = new("Zenseless.OpenTK.Tests.Content");
+		var resourceDirectory = new ShortestMatchResourceDirectory(new EmbeddedResourceDirectory());
 		Helper.ExecuteOnOpenGL(window =>
 		{
 			using var stream = resourceDirectory.Resource(name).Open();
@@ -31,7 +31,6 @@ public class Texture2DLoaderTests
 			GL.PixelStore(PixelStoreParameter.PackAlignment, 1); // some image sizes will cause memory acceptions otherwise
 			GL.GetTextureImage(tex.Handle, 0, pixelFormat, PixelType.UnsignedByte, buffer.Length, buffer);
 			CollectionAssert.AreEqual(pixels, buffer);
-			//Assert.IsTrue(buffer.Any(value => 0 != value));
 			tex.Dispose();
 			return 0;
 		});
