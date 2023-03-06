@@ -9,10 +9,10 @@ namespace Zenseless.OpenTK.Tests;
 public class Texture2DLoaderTests
 {
 	[DataTestMethod(), TestCategory("OpenGL")]
-	[DataRow("test.jpg", 335, 1024, SizedInternalFormat.Rgb8)]
-	[DataRow("roughness.png", 1024, 1024, SizedInternalFormat.R8)]
-	[DataRow("grass.png", 320, 224, SizedInternalFormat.Rgba8)]
-	[DataRow("grass32.png", 320, 224, SizedInternalFormat.Rgba8)]
+	[DataRow("rgb.jpg", 115, 101, SizedInternalFormat.Rgb8)]
+	[DataRow("grayscale.png", 533, 657, SizedInternalFormat.R8)]
+	[DataRow("paletteAlpha.png", 320, 224, SizedInternalFormat.Rgba8)]
+	[DataRow("rgba.png", 320, 224, SizedInternalFormat.Rgba8)]
 	public void LoadJpgTest(string name, int width, int height, SizedInternalFormat expectedFormat)
 	{
 		var resourceDirectory = new ShortestMatchResourceDirectory(new EmbeddedResourceDirectory());
