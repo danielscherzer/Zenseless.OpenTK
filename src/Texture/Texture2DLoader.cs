@@ -36,6 +36,7 @@ public static class Texture2DLoader
 		var internalFormat = TextureExtensions.InternalFormatFromColorChannels(channelCount);
 
 		image.Flip();
+		if (1 == channelCount) image.Grayscale();
 		var pixels = image.GetPixelsUnsafe().GetAreaPointer(0, 0, image.Width, image.Height);
 		var texture = new Texture2D(image.Width, image.Height, internalFormat)
 		{

@@ -10,8 +10,8 @@ namespace Zenseless.OpenTK.Tests;
 public class Texture2DLoaderTests
 {
 	[DataTestMethod(), TestCategory("OpenGL")]
-	//[DataRow("test.jpg", 335, 1024, SizedInternalFormat.Rgb8)]
-	//[DataRow("roughness.png", 1024, 1024, SizedInternalFormat.R8)]
+	[DataRow("test.jpg", 335, 1024, SizedInternalFormat.Rgb8)]
+	[DataRow("roughness.png", 1024, 1024, SizedInternalFormat.R8)]
 	[DataRow("grass.png", 320, 224, SizedInternalFormat.Rgba8)]
 	public void LoadJpgTest(string name, int width, int height, SizedInternalFormat expectedFormat)
 	{
@@ -28,6 +28,7 @@ public class Texture2DLoaderTests
 			Assert.AreEqual(expectedFormat, (SizedInternalFormat)format);
 			var pixelFormat = TextureExtensions.PixelFormatFrom((SizedInternalFormat)format);
 			byte[] buffer = new byte[width * height * TextureExtensions.ChannelCountFrom(pixelFormat)];
+			GL.PixelStore(PixelStoreParameter.PackAlignment, 1); // some image sizes will cause memory acceptions otherwise
 			GL.GetTextureImage(tex.Handle, 0, pixelFormat, PixelType.UnsignedByte, buffer.Length, buffer);
 			CollectionAssert.AreEqual(pixels, buffer);
 			//Assert.IsTrue(buffer.Any(value => 0 != value));
