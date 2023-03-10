@@ -237,5 +237,48 @@ namespace Zenseless.OpenTK
 			float radius = cartesian.Length;
 			return new Vector2(angle, radius);
 		}
+
+		/// <summary>
+		/// Converts <see cref="Vector2"/> into <see cref="System.Numerics.Vector2"/>
+		/// </summary>
+		/// <param name="vec">The input vector to convert</param>
+		/// <returns></returns>
+		public static System.Numerics.Vector2 ToSystemNumerics(this Vector2 vec) => new(vec.X, vec.Y);
+
+		/// <summary>
+		/// Converts <see cref="Vector3"/> into <see cref="System.Numerics.Vector3"/>
+		/// </summary>
+		/// <param name="vec">The input vector to convert</param>
+		/// <returns></returns>
+		public static System.Numerics.Vector3 ToSystemNumerics(this Vector3 vec) => new(vec.X, vec.Y, vec.Z);
+
+		/// <summary>
+		/// Converts <see cref="Vector4"/> into <see cref="System.Numerics.Vector4"/>
+		/// </summary>
+		/// <param name="vec">The input vector to convert</param>
+		/// <returns></returns>
+		public static System.Numerics.Vector4 ToSystemNumerics(this Vector4 vec) => new(vec.X, vec.Y, vec.Z, vec.W);
+
+		/// <summary>
+		/// Converts <see cref="System.Numerics.Vector2"/> into <see cref="Vector2"/>
+		/// </summary>
+		/// <param name="vec">The input vector to convert</param>
+		/// <returns></returns>
+		public static Vector2 ToOpenTK(this System.Numerics.Vector2 vec) => new(vec.X, vec.Y);
+
+		/// <summary>
+		/// Converts <see cref="System.Numerics.Vector3"/> into <see cref="Vector3"/>
+		/// </summary>
+		/// <param name="vec">The input vector to convert</param>
+		/// <returns></returns>
+		public static Vector3 ToOpenTK(this System.Numerics.Vector3 vec) => new(vec.X, vec.Y, vec.Z);
+
+		/// <summary>
+		/// Converts <see cref="System.Numerics.Vector4"/> into <see cref="Vector4"/>
+		/// </summary>
+		/// <param name="vec">The input vector to convert</param>
+		/// <returns></returns>
+		public static Vector4 ToOpenTK(this System.Numerics.Vector4 vec) => new(vec.X, vec.Y, vec.Z, vec.W);
+
 	}
 }
