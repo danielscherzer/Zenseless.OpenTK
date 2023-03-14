@@ -15,6 +15,13 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="value">The input value.</param>
 		/// <returns></returns>
+		public static Vector2 Abs(this in Vector2 value) => new(MathF.Abs(value.X), MathF.Abs(value.Y));
+
+		/// <summary>
+		/// Returns for each component the absolute value.
+		/// </summary>
+		/// <param name="value">The input value.</param>
+		/// <returns></returns>
 		public static Vector3 Abs(this in Vector3 value) => new(MathF.Abs(value.X), MathF.Abs(value.Y), MathF.Abs(value.Z));
 
 		/// <summary>
@@ -22,7 +29,7 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns></returns>
-		public static Vector2 Ceiling(in Vector2 value) => new(MathF.Ceiling(value.X), MathF.Ceiling(value.Y));
+		public static Vector2 Ceiling(this in Vector2 value) => new(MathF.Ceiling(value.X), MathF.Ceiling(value.Y));
 
 		/// <summary>
 		/// Clamp each component of the input vector v in between min and max. 
@@ -110,7 +117,7 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="value">Input floating-point vector</param>
 		/// <returns>The integer parts.</returns>
-		public static Vector2 Truncate(in Vector2 value) => new(MathF.Floor(value.X), MathF.Floor(value.Y));
+		public static Vector2 Truncate(this in Vector2 value) => new(MathF.Floor(value.X), MathF.Floor(value.Y));
 
 		/// <summary>
 		/// Returns for each component the integer part of the specified floating-point number.
@@ -125,6 +132,13 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="v">Input floating-point vector</param>
 		/// <returns>For each component returns the largest integer less than or equal to the specified floating-point number.</returns>
+		public static Vector2 Floor(this in Vector2 v) => new(MathF.Floor(v.X), MathF.Floor(v.Y));
+
+		/// <summary>
+		/// For each component returns the largest integer less than or equal to the specified floating-point number.
+		/// </summary>
+		/// <param name="v">Input floating-point vector</param>
+		/// <returns>For each component returns the largest integer less than or equal to the specified floating-point number.</returns>
 		public static Vector3 Floor(this in Vector3 v) => new(MathF.Floor(v.X), MathF.Floor(v.Y), MathF.Floor(v.Z));
 
 		/// <summary>
@@ -133,6 +147,17 @@ namespace Zenseless.OpenTK
 		/// <param name="v">Input vector</param>
 		/// <returns></returns>
 		public static Vector3 Fract(this Vector3 v)
+		{
+			var abs = v.Abs();
+			return abs - abs.Truncate();
+		}
+
+		/// <summary>
+		/// For each component returns the fractional part of each components floating-point number.
+		/// </summary>
+		/// <param name="v">Input vector</param>
+		/// <returns></returns>
+		public static Vector2 Fract(this Vector2 v)
 		{
 			var abs = v.Abs();
 			return abs - abs.Truncate();
