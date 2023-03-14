@@ -106,6 +106,14 @@ namespace Zenseless.OpenTK
 		public static Vector2 Truncate(in Vector2 value) => new(value.X.FastTruncate(), value.Y.FastTruncate());
 
 		/// <summary>
+		/// Returns for each component the integer part of the specified floating-point number.
+		/// Works not for constructs like <code>1f - float.epsilon</code> because this is outside of floating point precision
+		/// </summary>
+		/// <param name="value">Input floating-point vector</param>
+		/// <returns>The integer parts.</returns>
+		public static Vector3 Truncate(this in Vector3 value) => new(value.X.FastTruncate(), value.Y.FastTruncate(), value.Z.FastTruncate());
+
+		/// <summary>
 		/// For each component returns the largest integer less than or equal to the specified floating-point number.
 		/// </summary>
 		/// <param name="v">Input vector</param>

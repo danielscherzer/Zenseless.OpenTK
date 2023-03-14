@@ -33,6 +33,20 @@ namespace Zenseless.OpenTK.Tests
 		}
 
 		[DataTestMethod()]
+		[DataRow(0, 0, 0, 0, 0, 0)]
+		[DataRow(0.3f, 0.4f, 0.5f, 0.3f, 0.4f, 0.5f)]
+		[DataRow(1.3f, 2.4f, 3.5f, 0.3f, 0.4f, 0.5f)]
+		[DataRow(-1.3f, -2.4f, -3.5f, 0.3f, 0.4f, 0.5f)]
+		public void FractTest(float x, float y, float z, float expectedX, float expectedY, float expectedZ)
+		{
+			var input = new Vector3(x, y, z);
+			var delta = 0.0000001f;
+			Assert.AreEqual(expectedX, input.Fract().X, delta);
+			Assert.AreEqual(expectedY, input.Fract().Y, delta);
+			Assert.AreEqual(expectedZ, input.Fract().Z, delta);
+		}
+
+		[DataTestMethod()]
 		[DataRow(0, 0, 0, 0)]
 		[DataRow(1, 0, 0, 1)]
 		[DataRow(0, 1, 0.5f * MathF.PI, 1)] //90°

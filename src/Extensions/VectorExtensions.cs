@@ -110,14 +110,33 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="value">Input floating-point vector</param>
 		/// <returns>The integer parts.</returns>
-		public static Vector2 Truncate(in Vector2 value) => new(value.X.FastTruncate(), value.Y.FastTruncate());
+		public static Vector2 Truncate(in Vector2 value) => new(MathF.Floor(value.X), MathF.Floor(value.Y));
+
+		/// <summary>
+		/// Returns for each component the integer part of the specified floating-point number.
+		/// Works not for constructs like <code>1f - float.epsilon</code> because this is outside of floating point precision
+		/// </summary>
+		/// <param name="value">Input floating-point vector</param>
+		/// <returns>The integer parts.</returns>
+		public static Vector3 Truncate(this in Vector3 value) => new(MathF.Floor(value.X), MathF.Floor(value.Y), MathF.Floor(value.Z));
 
 		/// <summary>
 		/// For each component returns the largest integer less than or equal to the specified floating-point number.
 		/// </summary>
-		/// <param name="v">Input vector</param>
+		/// <param name="v">Input floating-point vector</param>
 		/// <returns>For each component returns the largest integer less than or equal to the specified floating-point number.</returns>
 		public static Vector3 Floor(this in Vector3 v) => new(MathF.Floor(v.X), MathF.Floor(v.Y), MathF.Floor(v.Z));
+
+		/// <summary>
+		/// For each component returns the fractional part of each components floating-point number.
+		/// </summary>
+		/// <param name="v">Input vector</param>
+		/// <returns></returns>
+		public static Vector3 Fract(this Vector3 v)
+		{
+			var abs = v.Abs();
+			return abs - abs.Truncate();
+		}
 
 		/// <summary>
 		/// Returns the value of x modulo y. This is computed as x - y * floor(x/y). 
