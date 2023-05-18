@@ -40,6 +40,14 @@ public static class Texture2DLoader
 			case ColorType.PaletteAlpha: internalFormat = Rgba8; image.ColorType = ColorType.TrueColor; break;
 			case ColorType.Palette: image.ColorType = ColorType.TrueColorAlpha; break;
 		}
+		//if(ColorSpace.sRGB == image.ColorSpace)
+		//{
+		//	switch (image.ColorType)
+		//	{
+		//		case ColorType.TrueColor: internalFormat = Srgb8; break;
+		//		case ColorType.TrueColorAlpha: internalFormat = Srgb8Alpha8; break;
+		//	}
+		//}
 		var pixels = image.GetPixelsUnsafe().GetAreaPointer(0, 0, image.Width, image.Height);
 		var texture = new Texture2D(image.Width, image.Height, internalFormat)
 		{

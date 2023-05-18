@@ -50,10 +50,22 @@ public static class TextureExtensions
 		SizedInternalFormat.R32f => PixelFormat.Red,
 		SizedInternalFormat.Rg8 => PixelFormat.Rg,
 		SizedInternalFormat.Rg32f => PixelFormat.Rg,
+		SizedInternalFormat.Srgb8 => PixelFormat.Rgb,
 		SizedInternalFormat.Rgb8 => PixelFormat.Rgb,
 		SizedInternalFormat.Rgb32f => PixelFormat.Rgb,
 		SizedInternalFormat.Rgba8 => PixelFormat.Rgba,
 		SizedInternalFormat.Rgba32f => PixelFormat.Rgba,
 		_ => throw new OpenGLException("Unsopported internal format."),
 	};
+
+	/// <summary>
+	/// Returns the <see cref="SizedInternalFormat"/> of the given texture
+	/// </summary>
+	/// <param name="texture">The texture to query.</param>
+	/// <returns></returns>
+	public static SizedInternalFormat InternalFormat(this Texture texture)
+	{
+		GL.GetTextureLevelParameter(texture.Handle, 0, GetTextureParameter.TextureInternalFormat, out int format);
+		return (SizedInternalFormat)format;
+	}
 }

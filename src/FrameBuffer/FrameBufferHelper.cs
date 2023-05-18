@@ -25,5 +25,23 @@ namespace Zenseless.OpenTK
 			GL.ReadPixels(x, y, width, height, format, PixelType.UnsignedByte, data);
 			return data;
 		}
+
+		/// <summary>
+		/// Saves a rectangular area of the current frame buffer into an array of bytes
+		/// </summary>
+		/// <param name="x">start position in x-direction</param>
+		/// <param name="y">start position in y-direction</param>
+		/// <param name="width">size in x-direction</param>
+		/// <param name="height">size in y-direction</param>
+		/// <param name="pixelFormat"></param>
+		/// <param name="channelCount"></param>
+		/// <code>false</code> by default.</param>
+		/// <returns>byte[]</returns>
+		public static byte[] ToByteArray(int x, int y, int width, int height, PixelFormat pixelFormat, int channelCount)
+		{
+			var data = new byte[width * height * channelCount];
+			GL.ReadPixels(x, y, width, height, pixelFormat, PixelType.UnsignedByte, data);
+			return data;
+		}
 	}
 }
