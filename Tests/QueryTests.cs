@@ -12,7 +12,8 @@ namespace Zenseless.OpenTK.Tests
 		[TestMethod(), TestCategory("OpenGL")]
 		public void QueryTest()
 		{
-			Helper.ExecuteOnOpenGL(window =>
+			//TODO: Make test run in Core profile, not IM
+			Helper.ExecuteOnOpenGLIM(window =>
 			{
 				GL.Enable(EnableCap.DepthTest);
 				GL.Clear(ClearBufferMask.DepthBufferBit);
@@ -27,7 +28,7 @@ namespace Zenseless.OpenTK.Tests
 				queryB.End();
 				Assert.AreEqual(0, queryB.Result);
 				return 0;
-			}, new Version(4, 3), 512, 512, ContextProfile.Compatability); //TODO: Make test run in Core profile
+			}, new Version(4, 3), 512, 512);
 		}
 
 		private static void DrawBox(float minX, float minY, float maxX, float maxY, float depth)

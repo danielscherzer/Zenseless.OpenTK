@@ -7,14 +7,14 @@ namespace Zenseless.OpenTK.Tests
 {
 	internal class Helper
 	{
-		internal static T ExecuteOnOpenGL<T>(Func<GameWindow, T> action, Version apiVersion, int width = 256, int height = 256, ContextProfile profile = ContextProfile.Core)
+		internal static T ExecuteOnOpenGL<T>(Func<GameWindow, T> action, Version apiVersion, int width = 256, int height = 256)
 		{
 			GLFWProvider.CheckForMainThread = false; // https://github.com/opentk/opentk/issues/1206
 			var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings
 			{
 				Flags = ContextFlags.Debug,
 				APIVersion = apiVersion,
-				Profile = profile,
+				Profile = ContextProfile.Core,
 				StartVisible = false
 			})
 			{
@@ -26,7 +26,25 @@ namespace Zenseless.OpenTK.Tests
 			window.Close();
 			return result;
 		}
+
+		internal static T ExecuteOnOpenGLIM<T>(Func<GameWindow, T> action, Version apiVersion, int width = 256, int height = 256)
+		{
+			GLFWProvider.CheckForMainThread = false; // https://github.com/opentk/opentk/issues/1206
+			var settings = ImmediateMode.NativeWindowSettings;
+			settings.APIVersion = apiVersion;
+			settings.StartVisible = false;
+
+			var window = new GameWindow(GameWindowSettings.Default, settings)
+			{
+				Size = new Vector2i(width, height),
+			};
+			var result = action(window);
+			window.Close();
+			return result;
+		}
+
 		internal static T ExecuteOnOpenGL<T>(Func<GameWindow, T> action) => ExecuteOnOpenGL(action, new Version(4, 5));
+
 		internal static T ExecuteOnOpenGL<T>(int width, int height, Func<GameWindow, T> action) => ExecuteOnOpenGL(action, new Version(4, 5), width, height);
 	}
 }

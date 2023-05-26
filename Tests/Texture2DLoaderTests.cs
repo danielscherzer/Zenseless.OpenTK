@@ -2,11 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
-using System.Linq;
 using Zenseless.Resources;
 using GLold = OpenTK.Graphics.OpenGL.GL;
 
@@ -21,10 +17,10 @@ public class Texture2DLoaderTests
 	[DataRow("grayscale.png", 533, 657, SizedInternalFormat.R8)]
 	[DataRow("paletteAlpha.png", 320, 224, SizedInternalFormat.Rgba8)]
 	[DataRow("rgba.png", 320, 224, SizedInternalFormat.Rgba8)]
-	public void LoadJpgTest(string name, int width, int height, SizedInternalFormat expectedFormat)
+	public void LoadImageTest(string name, int width, int height, SizedInternalFormat expectedFormat)
 	{
 		var resourceDirectory = new ShortestMatchResourceDirectory(new EmbeddedResourceDirectory());
-		_ = Helper.ExecuteOnOpenGL(window =>
+		_ = Helper.ExecuteOnOpenGLIM(window =>
 		{
 			using var stream = resourceDirectory.Resource(name).Open();
 			using var image = new MagickImage(stream);
@@ -46,10 +42,10 @@ public class Texture2DLoaderTests
 			// render texture
 			RenderTexture(tex, pixels, pixelFormat, channelCount);
 			return 0;
-		}, new Version(4, 5), width, height, ContextProfile.Compatability);
+		}, new Version(3, 3), width, height);
 	}
 
-	private void RenderTexture(Texture2D tex, byte[] pixels, PixelFormat pixelFormat, byte channelCount)
+	private static void RenderTexture(Texture2D tex, byte[] pixels, PixelFormat pixelFormat, byte channelCount)
 	{
 		GL.Viewport(0, 0, tex.Width, tex.Height);
 		GL.ClearColor(0f, 0f, 0f, 0f);
