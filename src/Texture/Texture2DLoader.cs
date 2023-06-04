@@ -1,6 +1,7 @@
 ﻿using ImageMagick;
 using OpenTK.Graphics.OpenGL4;
 using System.IO;
+using Zenseless.Resources;
 
 namespace Zenseless.OpenTK;
 using static SizedInternalFormat;
@@ -10,6 +11,19 @@ using static SizedInternalFormat;
 /// </summary>
 public static class Texture2DLoader
 {
+	/// <summary>
+	/// Load a texture out of the given resource directory.
+	/// </summary>
+	/// <param name="resourceDirectory"></param>
+	/// <param name="name">The name of the resource that contains an image.</param>
+	/// <param name="mipMap">Create mip maps</param>
+	/// <returns>A <see cref="Texture2D"/>.</returns>
+	public static Texture2D LoadTexture(this IResourceDirectory resourceDirectory, string name, bool mipMap = true)
+	{
+		using Stream stream = resourceDirectory.Resource(name).Open();
+		return Load(stream, mipMap);
+	}
+
 	/// <summary>
 	/// Load a texture from the given stream.
 	/// </summary>

@@ -1,7 +1,10 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using Zenseless.Resources;
 
 namespace Zenseless.OpenTK
 {
@@ -123,5 +126,87 @@ namespace Zenseless.OpenTK
 		//[HandleProcessCorruptedStateExceptions]
 		//[SecurityCritical]
 		public static ShaderProgram CompileLink(this ShaderProgram shaderProgram, params (ShaderType, string)[] shaders) => shaderProgram.CompileLink(shaders as IEnumerable<(ShaderType, string)>);
+
+		/// <summary>
+		/// Get a list of shader sourcecodes from a list of resource names
+		/// </summary>
+		/// <param name="resourceDirectory">The <see cref="IResourceDirectory"/>.</param>
+		/// <param name="shaderTypeResourceName">A list of <see cref="ShaderType"/> and resource names.</param>
+		public static List<(ShaderType, string)> GetShaderProgramSource(this IResourceDirectory resourceDirectory, IEnumerable<(ShaderType, string)> shaderTypeResourceName)
+		{
+			List<(ShaderType, string)> shaderTypeSourceTuples = new();
+			foreach ((ShaderType type, string resourceName) in shaderTypeResourceName)
+			{
+				Trace.WriteLine($"Loading shader '{type}' from resource {resourceName}");
+				string sourceCode = resourceDirectory.Resource(resourceName).AsString();
+				shaderTypeSourceTuples.Add((type, sourceCode));
+			}
+			return shaderTypeSourceTuples;
+		}
+
+		/// <summary>
+		/// Get a list of shader sourcecodes from a list of resource names. Shader types are infered from resource name extensions.
+		/// (.frag,.vert, .geom, .tesc, .tese, .comp)
+		/// </summary>
+		/// <param name="resourceDirectory">The <see cref="IResourceDirectory"/>.</param>
+		/// <param name="shaderResourceNames">The resource names of the shaders.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentException">If an invalid resource extensions is found.</exception>
+		public static List<(ShaderType, string)> GetShaderProgramSource(this IResourceDirectory resourceDirectory, params string[] shaderResourceNames)
+		{
+			List<(ShaderType, string)> shaderTypeNameTuples = new();
+			foreach (var shaderName in shaderResourceNames)
+			{
+				string ext = Path.GetExtension(shaderName);
+				if (dicShaderExtensionTypeTuple.TryGetValue(ext[1..], out var type))
+				{
+					shaderTypeNameTuples.Add((type, shaderName));
+				}
+				else
+				{
+					throw new ArgumentException($"Invalid shader extension '{ext}' for '{shaderName}'");
+				}
+			}
+			return resourceDirectory.GetShaderProgramSource(shaderTypeNameTuples);
+		}
+
+		/// <summary>
+		/// Get a list of shader sourcecodes from a resource name without extension. Shader types are infered by adding well known shader extensions, like
+		/// .frag,.vert, .geom, .tesc, .tese or .comp.
+		/// </summary>
+		/// <param name="resourceDirectory">The <see cref="IResourceDirectory"/>.</param>
+		/// <param name="nameWithoutExtension">A resource name without extension.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentException">If no resource name with a well kknown shader extension is found.</exception>
+		public static List<(ShaderType, string)> GetShaderProgramSource(this IResourceDirectory resourceDirectory, string nameWithoutExtension)
+		{
+			List<(ShaderType, string)> shaderTypeSourceTuples = new();
+			foreach ((string extension, ShaderType type) in shaderExtensionTypeTuple)
+			{
+				string shaderName = $"{nameWithoutExtension}.{extension}";
+				if (resourceDirectory.Exists(shaderName))
+				{
+					Trace.WriteLine($"Loading shader '{type}' from resource {shaderName}");
+					string sourceCode = resourceDirectory.Resource(shaderName).AsString();
+					shaderTypeSourceTuples.Add((type, sourceCode));
+				}
+			}
+			if (0 == shaderTypeSourceTuples.Count) throw new ArgumentException($"Name '{nameWithoutExtension}' did not match any shaders in the resource directory.");
+			return shaderTypeSourceTuples;
+		}
+
+
+		private static readonly (string, ShaderType)[] shaderExtensionTypeTuple = new (string, ShaderType)[]
+{
+			("frag", ShaderType.FragmentShader),
+			("vert", ShaderType.VertexShader),
+			("geom", ShaderType.GeometryShader),
+			("tesc", ShaderType.TessControlShader),
+			("tese", ShaderType.TessEvaluationShader),
+			("comp", ShaderType.ComputeShader),
+};
+
+		private static readonly IReadOnlyDictionary<string, ShaderType> dicShaderExtensionTypeTuple =
+			new Dictionary<string, ShaderType>(shaderExtensionTypeTuple.Select(v => new KeyValuePair<string, ShaderType>(v.Item1, v.Item2)));
 	}
 }

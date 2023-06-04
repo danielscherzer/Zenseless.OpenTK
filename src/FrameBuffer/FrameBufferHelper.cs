@@ -35,8 +35,7 @@ namespace Zenseless.OpenTK
 		/// <param name="height">size in y-direction</param>
 		/// <param name="pixelFormat"></param>
 		/// <param name="channelCount"></param>
-		/// <code>false</code> by default.</param>
-		/// <returns>byte[]</returns>
+		/// <returns>A byte[]</returns>
 		public static byte[] ToByteArray(int x, int y, int width, int height, PixelFormat pixelFormat, int channelCount)
 		{
 			var data = new byte[width * height * channelCount];
