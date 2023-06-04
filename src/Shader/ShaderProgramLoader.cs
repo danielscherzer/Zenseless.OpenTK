@@ -195,6 +195,16 @@ namespace Zenseless.OpenTK
 			return shaderTypeSourceTuples;
 		}
 
+		/// <summary>
+		/// Create a <see cref="ShaderProgram"/> from a list of shader sources.
+		/// </summary>
+		/// <param name="shaderSources">A list of shader sources.</param>
+		/// <returns>A <see cref="ShaderProgram"/></returns>
+		public static ShaderProgram CreaterShaderProgram(this IEnumerable<(ShaderType, string)> shaderSources)
+		{
+			var shaderProgram = new ShaderProgram();
+			return shaderProgram.CompileLink(shaderSources);
+		}
 
 		private static readonly (string, ShaderType)[] shaderExtensionTypeTuple = new (string, ShaderType)[]
 {
