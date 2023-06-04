@@ -132,7 +132,7 @@ namespace Zenseless.OpenTK
 		/// </summary>
 		/// <param name="resourceDirectory">The <see cref="IResourceDirectory"/>.</param>
 		/// <param name="shaderTypeResourceName">A list of <see cref="ShaderType"/> and resource names.</param>
-		public static List<(ShaderType, string)> GetShaderProgramSource(this IResourceDirectory resourceDirectory, IEnumerable<(ShaderType, string)> shaderTypeResourceName)
+		public static List<(ShaderType, string)> GetShaderProgramSources(this IResourceDirectory resourceDirectory, IEnumerable<(ShaderType, string)> shaderTypeResourceName)
 		{
 			List<(ShaderType, string)> shaderTypeSourceTuples = new();
 			foreach ((ShaderType type, string resourceName) in shaderTypeResourceName)
@@ -152,7 +152,7 @@ namespace Zenseless.OpenTK
 		/// <param name="shaderResourceNames">The resource names of the shaders.</param>
 		/// <returns></returns>
 		/// <exception cref="ArgumentException">If an invalid resource extensions is found.</exception>
-		public static List<(ShaderType, string)> GetShaderProgramSource(this IResourceDirectory resourceDirectory, params string[] shaderResourceNames)
+		public static List<(ShaderType, string)> GetShaderProgramSources(this IResourceDirectory resourceDirectory, params string[] shaderResourceNames)
 		{
 			List<(ShaderType, string)> shaderTypeNameTuples = new();
 			foreach (var shaderName in shaderResourceNames)
@@ -167,7 +167,7 @@ namespace Zenseless.OpenTK
 					throw new ArgumentException($"Invalid shader extension '{ext}' for '{shaderName}'");
 				}
 			}
-			return resourceDirectory.GetShaderProgramSource(shaderTypeNameTuples);
+			return resourceDirectory.GetShaderProgramSources(shaderTypeNameTuples);
 		}
 
 		/// <summary>
@@ -178,7 +178,7 @@ namespace Zenseless.OpenTK
 		/// <param name="nameWithoutExtension">A resource name without extension.</param>
 		/// <returns></returns>
 		/// <exception cref="ArgumentException">If no resource name with a well kknown shader extension is found.</exception>
-		public static List<(ShaderType, string)> GetShaderProgramSource(this IResourceDirectory resourceDirectory, string nameWithoutExtension)
+		public static List<(ShaderType, string)> GetShaderProgramSources(this IResourceDirectory resourceDirectory, string nameWithoutExtension)
 		{
 			List<(ShaderType, string)> shaderTypeSourceTuples = new();
 			foreach ((string extension, ShaderType type) in shaderExtensionTypeTuple)
