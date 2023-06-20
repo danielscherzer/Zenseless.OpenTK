@@ -1,17 +1,16 @@
-﻿namespace Zenseless.OpenTK
+﻿namespace Zenseless.OpenTK;
+
+/// <summary>
+/// Contains the available filter modes for magnification filtering of a texture
+/// </summary>
+public enum TextureMagFilter
 {
 	/// <summary>
-	/// Contains the available filter modes for magnification filtering of a texture
+	/// Nearest neighbor filtering
 	/// </summary>
-	public enum TextureMagFilter
-	{
-		/// <summary>
-		/// Nearest neighbor filtering
-		/// </summary>
-		Nearest = global::OpenTK.Graphics.OpenGL4.TextureMagFilter.Nearest,
-		/// <summary>
-		/// Linear filtering
-		/// </summary>
-		Linear = global::OpenTK.Graphics.OpenGL4.TextureMagFilter.Linear
-	}
+	Nearest = global::OpenTK.Graphics.OpenGL4.TextureMagFilter.Nearest,
+	/// <summary>
+	/// Linear filtering
+	/// </summary>
+	Linear = global::OpenTK.Graphics.OpenGL4.TextureMagFilter.Linear
 }

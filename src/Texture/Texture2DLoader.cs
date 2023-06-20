@@ -4,8 +4,6 @@ using System.IO;
 using Zenseless.Resources;
 
 namespace Zenseless.OpenTK;
-using static SizedInternalFormat;
-
 /// <summary>
 /// Class for loading textures from images
 /// </summary>
