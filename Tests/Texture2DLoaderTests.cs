@@ -24,7 +24,7 @@ public class Texture2DLoaderTests
 		{
 			using var stream = resourceDirectory.Resource(name).Open();
 			using var image = new MagickImage(stream);
-			using var tex = Texture2DLoader.Load(image);
+			using var tex = Texture2DLoader.LoadTexture(image);
 			var pixels = image.GetPixelsUnsafe().ToArray();
 			Assert.IsNotNull(pixels);
 			Assert.AreEqual(width, tex.Width);

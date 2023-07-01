@@ -19,7 +19,7 @@ public static class Texture2DLoader
 	public static Texture2D LoadTexture(this IResourceDirectory resourceDirectory, string name, bool mipMap = true)
 	{
 		using Stream stream = resourceDirectory.Resource(name).Open();
-		return Load(stream, mipMap);
+		return stream.LoadTexture(mipMap);
 	}
 
 	/// <summary>
@@ -28,11 +28,11 @@ public static class Texture2DLoader
 	/// <param name="stream">A stream containing an image.</param>
 	/// <param name="mipMap">Are mipmaps created.</param>
 	/// <returns>A Texture.</returns>
-	public static Texture2D Load(Stream stream, bool mipMap = true)
+	public static Texture2D LoadTexture(this Stream stream, bool mipMap = true)
 	{
 		//TODO: Try out alternatives to magickimage
 		using var image = new MagickImage(stream);
-		return Load(image, mipMap);
+		return image.LoadTexture(mipMap);
 	}
 
 	/// <summary>
@@ -41,15 +41,15 @@ public static class Texture2DLoader
 	/// <param name="image">A <seealso cref="MagickImage"/>.</param>
 	/// <param name="mipMap">Are mipmaps created.</param>
 	/// <returns>A Texture.</returns>
-	public static Texture2D Load(MagickImage image, bool mipMap = true)
+	public static Texture2D LoadTexture(this MagickImage image, bool mipMap = true)
 	{
 		image.Flip();
-		SizedInternalFormat internalFormat = Rgb8; // default rgb
+		SizedInternalFormat internalFormat = SizedInternalFormat.Rgb8; // default rgb
 		switch (image.ColorType)
 		{
-			case ColorType.TrueColorAlpha: internalFormat = Rgba8; break;
-			case ColorType.Grayscale: internalFormat = R8; image.Grayscale(); break;
-			case ColorType.PaletteAlpha: internalFormat = Rgba8; image.ColorType = ColorType.TrueColor; break;
+			case ColorType.TrueColorAlpha: internalFormat = SizedInternalFormat.Rgba8; break;
+			case ColorType.Grayscale: internalFormat = SizedInternalFormat.R8; image.Grayscale(); break;
+			case ColorType.PaletteAlpha: internalFormat = SizedInternalFormat.Rgba8; image.ColorType = ColorType.TrueColor; break;
 			case ColorType.Palette: image.ColorType = ColorType.TrueColorAlpha; break;
 		}
 		//if(ColorSpace.sRGB == image.ColorSpace)
