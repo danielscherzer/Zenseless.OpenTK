@@ -1,4 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL4;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -60,6 +62,11 @@ public class DebugOutputGL : Disposable
 	/// Event will be called each time a debug event occurs
 	/// </summary>
 	public event EventHandler<DebugEventArgs>? DebugEvent;
+
+	/// <summary>
+	/// Returns an instance of <see cref="NativeWindowSettings"/> for immediate mode rendering
+	/// </summary>
+	public static NativeWindowSettings NativeWindowSettings => new() { APIVersion = new Version(4, 5), Flags = ContextFlags.Debug };
 
 	/// <summary>
 	/// Will be called from the default Dispose method. Implementers should dispose all their resources her.
