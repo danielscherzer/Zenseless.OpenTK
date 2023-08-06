@@ -67,11 +67,15 @@ public class FrameBuffer : Disposable, IObjectHandle<FrameBuffer>
 				throw new ArgumentException($"Given Texture dimension ({texture.Width},{texture.Height}) " +
 					$"do not match primary texture ({firstTexture.Width},{firstTexture.Height})");
 		}
-		_attachedTextures.Add(attachmentPoint, texture);
 		if (DisposesAttachments)
 		{
 			_disposables.Add(texture);
+			if(_attachedTextures.TryGetValue(attachmentPoint, out var attachment))
+			{
+				attachment.Dispose();
+			}
 		}
+		_attachedTextures[attachmentPoint] = texture;
 		GL.NamedFramebufferTexture(Handle, attachmentPoint, texture.Handle, 0);
 		CheckFramebufferStatus();
 
