@@ -50,7 +50,7 @@ public class FrameBuffer : Disposable, IObjectHandle<FrameBuffer>
 	public Handle<FrameBuffer> Handle { get; }
 
 	/// <summary>
-	/// Attaches the specified texture. The FBO will try to dispose the texture when the FBO is disposed.
+	/// Attaches the specified texture. If <see cref="DisposesAttachments"/> is <c>true</c> the texture will be disposed when the FBO is disposed.
 	/// </summary>
 	/// <param name="texture">The texture to attach.</param>
 	/// <param name="attachmentPoint">The attachment point to attach to.</param>
@@ -66,16 +66,17 @@ public class FrameBuffer : Disposable, IObjectHandle<FrameBuffer>
 			if (firstTexture.Width != texture.Width || firstTexture.Height != texture.Height)
 				throw new ArgumentException($"Given Texture dimension ({texture.Width},{texture.Height}) " +
 					$"do not match primary texture ({firstTexture.Width},{firstTexture.Height})");
-		}
-		if (DisposesAttachments)
-		{
-			_disposables.Add(texture);
-			if(_attachedTextures.TryGetValue(attachmentPoint, out var attachment))
+			//Check for multiple attaching to the same attachment point
+			if(_attachedTextures.ContainsKey(attachmentPoint))
 			{
-				attachment.Dispose();
+				throw new ArgumentException($"Given attachment point '{attachmentPoint}' is in use.");
 			}
 		}
 		_attachedTextures[attachmentPoint] = texture;
+		if (DisposesAttachments)
+		{
+			_disposables.Add(texture);
+		}
 		GL.NamedFramebufferTexture(Handle, attachmentPoint, texture.Handle, 0);
 		CheckFramebufferStatus();
 
