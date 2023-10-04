@@ -21,9 +21,7 @@ public static class FrameBufferHelper
 	{
 		var format = alpha ? PixelFormat.Rgba : PixelFormat.Rgb;
 		var channelCount = alpha ? 4 : 3;
-		var data = new byte[width * height * channelCount];
-		GL.ReadPixels(x, y, width, height, format, PixelType.UnsignedByte, data);
-		return data;
+		return ToByteArray(x, y, width, height, format, channelCount);
 	}
 
 	/// <summary>

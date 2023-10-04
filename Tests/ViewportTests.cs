@@ -15,7 +15,7 @@ namespace Zenseless.OpenTK.Tests
 			Viewport viewport = new();
 			Helper.ExecuteOnOpenGL(width, height, window =>
 			{
-				viewport.Resize(window.Size.X, window.Size.Y);
+				viewport.Resize(window.ClientSize.X, window.ClientSize.Y);
 				Assert.AreEqual(invAspect, viewport.InvAspectRatio);
 				return 0;
 			});
@@ -27,12 +27,12 @@ namespace Zenseless.OpenTK.Tests
 			Viewport viewport = new();
 			Helper.ExecuteOnOpenGL(1024, 512, window =>
 			{
-				viewport.Resize(window.Size.X, window.Size.Y);
+				viewport.Resize(window.ClientSize.X, window.ClientSize.Y);
 				// check corners
 				Assert.AreEqual(new Vector2(-1, 1), Vector2.Zero.Transform(viewport.InvViewportMatrix));
-				Assert.AreEqual(new Vector2(1, -1), new Vector2(window.Size.X - 1, window.Size.Y - 1).Transform(viewport.InvViewportMatrix));
-				Assert.AreEqual(new Vector2(-1, -1), new Vector2(0f, window.Size.Y - 1).Transform(viewport.InvViewportMatrix));
-				Assert.AreEqual(new Vector2(1, 1), new Vector2(window.Size.X - 1, 0).Transform(viewport.InvViewportMatrix));
+				Assert.AreEqual(new Vector2(1, -1), new Vector2(window.ClientSize.X - 1, window.ClientSize.Y - 1).Transform(viewport.InvViewportMatrix));
+				Assert.AreEqual(new Vector2(-1, -1), new Vector2(0f, window.ClientSize.Y - 1).Transform(viewport.InvViewportMatrix));
+				Assert.AreEqual(new Vector2(1, 1), new Vector2(window.ClientSize.X - 1, 0).Transform(viewport.InvViewportMatrix));
 				return 0;
 			});
 		}

@@ -12,7 +12,7 @@ namespace Zenseless.OpenTK.Tests
 		[TestMethod(), TestCategory("OpenGL")]
 		public void ToByteArrayTest()
 		{
-			const int res = 256;
+			const int res = 128;
 
 			static byte[] Execute(GameWindow window)
 			{

@@ -14,7 +14,6 @@ public class OpenTKCompatibilityTests
 	{
 		Helper.ExecuteOnOpenGLIM(window =>
 		{
-			GL.Viewport(0, 0, window.Size.X, window.Size.Y);
 			GL.ClearColor(0f, 0f, 0f, 0f);
 			GL.Clear(ClearBufferMask.ColorBufferBit);
 			GL.Color4(Color4.White);

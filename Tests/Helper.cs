@@ -18,10 +18,11 @@ namespace Zenseless.OpenTK.Tests
 				StartVisible = false
 			})
 			{
-				Size = new Vector2i(width, height),
+				ClientRectangle = new Box2i(0, 0, width, height),
 			};
 			DebugOutputGL debugOutput = new();
 			var result = action(window);
+			window.SwapBuffers();
 			debugOutput.Dispose();
 			window.Close();
 			return result;
@@ -36,9 +37,10 @@ namespace Zenseless.OpenTK.Tests
 
 			var window = new GameWindow(GameWindowSettings.Default, settings)
 			{
-				Size = new Vector2i(width, height),
+				ClientRectangle = new Box2i(0, 0, width, height),
 			};
 			var result = action(window);
+			window.SwapBuffers();
 			window.Close();
 			return result;
 		}
