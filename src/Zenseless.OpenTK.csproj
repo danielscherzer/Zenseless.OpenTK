@@ -36,8 +36,8 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.3.0" />
-    <PackageReference Include="OpenTK" Version="4.8.1" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.8.0" />
+    <PackageReference Include="OpenTK" Version="4.8.2" />
     <PackageReference Include="Zenseless.Patterns" Version="0.6.35" />
     <PackageReference Include="Zenseless.Resources" Version="0.2.15" />
   </ItemGroup>
