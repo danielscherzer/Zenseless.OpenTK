@@ -61,7 +61,7 @@ public static class Texture2DLoader
 		//	}
 		//}
 		var pixels = image.GetPixelsUnsafe().GetAreaPointer(0, 0, image.Width, image.Height);
-		var texture = new Texture2D(image.Width, image.Height, internalFormat)
+		var texture = new Texture2D((int)image.Width, (int)image.Height, internalFormat)
 		{
 			Function = TextureFunction.ClampToEdge,
 			MagFilter = TextureMagFilter.Linear,
@@ -70,7 +70,7 @@ public static class Texture2DLoader
 
 		var format = TextureExtensions.PixelFormatFrom(internalFormat);
 		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1); // some image sizes will cause memory acceptions otherwise
-		GL.TextureSubImage2D(texture.Handle, 0, 0, 0, image.Width, image.Height, format, PixelType.UnsignedByte, pixels);
+		GL.TextureSubImage2D(texture.Handle, 0, 0, 0, (int)image.Width, (int)image.Height, format, PixelType.UnsignedByte, pixels);
 
 		if (mipMap) GL.GenerateTextureMipmap(texture.Handle);
 
