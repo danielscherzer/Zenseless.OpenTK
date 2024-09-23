@@ -33,13 +33,4 @@ public class ShaderProgramException : OpenGLException
 	public ShaderProgramException(string message, Exception innerException) : base(message, innerException)
 	{
 	}
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="ShaderException"/> class with serialized data.
-	/// </summary>
-	/// <param name="info">Holds the serialized object data about the exception being thrown.</param>
-	/// <param name="context">Contains contextual information about the source or destination.</param>
-	protected ShaderProgramException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
 }

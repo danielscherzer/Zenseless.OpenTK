@@ -29,9 +29,9 @@ public class Texture2DLoaderTests
 			Assert.IsNotNull(pixels);
 			Assert.AreEqual(width, tex.Width);
 			Assert.AreEqual(height, tex.Height);
-			GL.GetTextureLevelParameter(tex.Handle, 0, GetTextureParameter.TextureInternalFormat, out int format);
-			Assert.AreEqual(expectedFormat, (SizedInternalFormat)format);
-			var pixelFormat = TextureExtensions.PixelFormatFrom((SizedInternalFormat)format);
+			var format = tex.InternalFormat();
+			Assert.AreEqual(expectedFormat, format);
+			var pixelFormat = TextureExtensions.PixelFormatFrom(format);
 			var channelCount = TextureExtensions.ChannelCountFrom(pixelFormat);
 			// copy texture back to buffer
 			byte[] buffer = new byte[width * height * channelCount];

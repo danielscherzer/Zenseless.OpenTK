@@ -33,13 +33,4 @@ public class OpenGLException : Exception
 	public OpenGLException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="OpenGLException"/> class with serialized data.
-	/// </summary>
-	/// <param name="info">Holds the serialized object data about the exception being thrown.</param>
-	/// <param name="context">Contains contextual information about the source or destination.</param>
-	protected OpenGLException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
 }
