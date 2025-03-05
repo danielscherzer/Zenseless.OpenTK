@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Zenseless.Patterns;
 
@@ -38,6 +39,21 @@ public class Buffer : Disposable, IObjectHandle<Buffer>
 		var elementSize = Marshal.SizeOf(data[0]);
 		var byteSize = elementSize * data.Length;
 		GL.NamedBufferData(Handle, byteSize, data, usageHint); //copy data over to GPU
+	}
+
+	/// <summary>
+	/// Copies the given data into a buffer object on the GPU.
+	/// </summary>
+	/// <typeparam name="DataType">The value data type of each array element</typeparam>
+	/// <param name="data">The data as a <see cref="List{DataType}"/></param>
+	/// <param name="usageHint">How will this buffer object be used</param>
+	public void Set<DataType>(List<DataType> data, BufferUsageHint usageHint = BufferUsageHint.StaticDraw) where DataType : struct
+	{
+		if (0 == data.Count) throw new ArgumentException("Empty array");
+		var elementSize = Marshal.SizeOf(data[0]);
+		var byteSize = elementSize * data.Count;
+		var span = CollectionsMarshal.AsSpan(data);
+		GL.NamedBufferData(Handle, byteSize, ref span[0], usageHint); //copy data over to GPU
 	}
 
 	/// <summary>
