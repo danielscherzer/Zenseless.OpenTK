@@ -82,7 +82,7 @@ public static class ShaderProgramLoader
 	//[SecurityCritical]
 	public static ShaderProgram CompileLink(this ShaderProgram shaderProgram, IEnumerable<(ShaderType, string)> shaders)
 	{
-		List<int> shaderId = new();
+		List<int> shaderId = [];
 		var unique = shaders.ToDictionary(data => data.Item1, data => data.Item2); // make sure each shader type is only present once
 		if (unique.Count < 1) throw new ShaderProgramException("Empty set of shaders for shader program");
 		foreach ((ShaderType type, string sourceCode) in unique)
@@ -134,7 +134,7 @@ public static class ShaderProgramLoader
 	/// <param name="shaderTypeResourceName">A list of <see cref="ShaderType"/> and resource names.</param>
 	public static List<(ShaderType, string)> GetShaderProgramSources(this IResourceDirectory resourceDirectory, IEnumerable<(ShaderType, string)> shaderTypeResourceName)
 	{
-		List<(ShaderType, string)> shaderTypeSourceTuples = new();
+		List<(ShaderType, string)> shaderTypeSourceTuples = [];
 		foreach ((ShaderType type, string resourceName) in shaderTypeResourceName)
 		{
 			Trace.WriteLine($"Loading shader '{type}' from resource {resourceName}");
@@ -154,7 +154,7 @@ public static class ShaderProgramLoader
 	/// <exception cref="ArgumentException">If an invalid resource extensions is found.</exception>
 	public static List<(ShaderType, string)> GetShaderProgramSources(this IResourceDirectory resourceDirectory, params string[] shaderResourceNames)
 	{
-		List<(ShaderType, string)> shaderTypeNameTuples = new();
+		List<(ShaderType, string)> shaderTypeNameTuples = [];
 		foreach (var shaderName in shaderResourceNames)
 		{
 			string ext = Path.GetExtension(shaderName);
@@ -180,7 +180,7 @@ public static class ShaderProgramLoader
 	/// <exception cref="ArgumentException">If no resource name with a well kknown shader extension is found.</exception>
 	public static List<(ShaderType, string)> GetShaderProgramSources(this IResourceDirectory resourceDirectory, string nameWithoutExtension)
 	{
-		List<(ShaderType, string)> shaderTypeSourceTuples = new();
+		List<(ShaderType, string)> shaderTypeSourceTuples = [];
 		foreach ((string extension, ShaderType type) in shaderExtensionTypeTuple)
 		{
 			string shaderName = $"{nameWithoutExtension}.{extension}";
@@ -206,16 +206,16 @@ public static class ShaderProgramLoader
 		return shaderProgram.CompileLink(shaderSources);
 	}
 
-	private static readonly (string, ShaderType)[] shaderExtensionTypeTuple = new (string, ShaderType)[]
-{
+	private static readonly (string, ShaderType)[] shaderExtensionTypeTuple =
+	[
 		("frag", ShaderType.FragmentShader),
 		("vert", ShaderType.VertexShader),
 		("geom", ShaderType.GeometryShader),
 		("tesc", ShaderType.TessControlShader),
 		("tese", ShaderType.TessEvaluationShader),
 		("comp", ShaderType.ComputeShader),
-};
+	];
 
-	private static readonly IReadOnlyDictionary<string, ShaderType> dicShaderExtensionTypeTuple =
-		new Dictionary<string, ShaderType>(shaderExtensionTypeTuple.Select(v => new KeyValuePair<string, ShaderType>(v.Item1, v.Item2)));
+	private static readonly Dictionary<string, ShaderType> dicShaderExtensionTypeTuple =
+		new(shaderExtensionTypeTuple.Select(v => new KeyValuePair<string, ShaderType>(v.Item1, v.Item2)));
 }
