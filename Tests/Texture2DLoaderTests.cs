@@ -11,7 +11,7 @@ namespace Zenseless.OpenTK.Tests;
 [TestClass()]
 public class Texture2DLoaderTests
 {
-	[DataTestMethod(), TestCategory("OpenGL")]
+	[TestMethod(), TestCategory("OpenGL")]
 	[DataRow(".rgb.jpg", 115, 101, SizedInternalFormat.Rgb8)]
 	[DataRow("srgb.jpg", 171, 153, SizedInternalFormat.Rgb8)]
 	[DataRow("grayscale.png", 533, 657, SizedInternalFormat.R8)]

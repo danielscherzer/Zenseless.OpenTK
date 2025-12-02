@@ -6,7 +6,7 @@ namespace Zenseless.OpenTK.Tests;
 [TestClass()]
 public class IntersectionTests
 {
-	[DataTestMethod()]
+	[TestMethod()]
 	[DataRow(0, 0, 0,  0, 0, 0)]
 	[DataRow(0, 0, 1,  1, 0, 1)]
 	[DataRow(0, 0, 0.1f, 0.1f, 0.1f, 0.1f)]
@@ -18,7 +18,7 @@ public class IntersectionTests
 		Assert.IsTrue(b.Overlaps(a));
 	}
 
-	[DataTestMethod()]
+	[TestMethod()]
 	[DataRow(-1, 0, 1, 1.0001f, 0, 1)]
 	[DataRow(-1, 0, 1, 1f, 0, 0.999f)]
 	[DataRow(0, 0, 0.99f, 2f, 0f, 1f)]

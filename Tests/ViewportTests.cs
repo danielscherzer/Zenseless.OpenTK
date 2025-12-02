@@ -1,40 +1,39 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
 
-namespace Zenseless.OpenTK.Tests
+namespace Zenseless.OpenTK.Tests;
+
+[TestClass()]
+public class ViewportTests
 {
-	[TestClass()]
-	public class ViewportTests
+
+	[TestMethod(), TestCategory("OpenGL")]
+	[DataRow(512, 512, 1f)]
+	[DataRow(1024, 512, 0.5f)]
+	public void InvAspectRatioTest(int width, int height, float invAspect)
 	{
-
-		[DataTestMethod(), TestCategory("OpenGL")]
-		[DataRow(512, 512, 1f)]
-		[DataRow(1024, 512, 0.5f)]
-		public void InvAspectRatioTest(int width, int height, float invAspect)
+		Viewport viewport = new();
+		Helper.ExecuteOnOpenGL(width, height, window =>
 		{
-			Viewport viewport = new();
-			Helper.ExecuteOnOpenGL(width, height, window =>
-			{
-				viewport.Resize(window.ClientSize.X, window.ClientSize.Y);
-				Assert.AreEqual(invAspect, viewport.InvAspectRatio);
-				return 0;
-			});
-		}
+			viewport.Resize(window.ClientSize.X, window.ClientSize.Y);
+			Assert.AreEqual(invAspect, viewport.InvAspectRatio);
+			return 0;
+		});
+	}
 
-		[TestMethod(), TestCategory("OpenGL")]
-		public void InvViewportMatrixTest()
+	[TestMethod(), TestCategory("OpenGL")]
+	public void InvViewportMatrixTest()
+	{
+		Viewport viewport = new();
+		Helper.ExecuteOnOpenGL(1024, 512, window =>
 		{
-			Viewport viewport = new();
-			Helper.ExecuteOnOpenGL(1024, 512, window =>
-			{
-				viewport.Resize(window.ClientSize.X, window.ClientSize.Y);
-				// check corners
-				Assert.AreEqual(new Vector2(-1, 1), Vector2.Zero.Transform(viewport.InvViewportMatrix));
-				Assert.AreEqual(new Vector2(1, -1), new Vector2(window.ClientSize.X - 1, window.ClientSize.Y - 1).Transform(viewport.InvViewportMatrix));
-				Assert.AreEqual(new Vector2(-1, -1), new Vector2(0f, window.ClientSize.Y - 1).Transform(viewport.InvViewportMatrix));
-				Assert.AreEqual(new Vector2(1, 1), new Vector2(window.ClientSize.X - 1, 0).Transform(viewport.InvViewportMatrix));
-				return 0;
-			});
-		}
+			viewport.Resize(window.ClientSize.X, window.ClientSize.Y);
+			// check corners
+			Assert.AreEqual(new Vector2(-1, 1), Vector2.Zero.Transform(viewport.InvViewportMatrix));
+			Assert.AreEqual(new Vector2(1, -1), new Vector2(window.ClientSize.X - 1, window.ClientSize.Y - 1).Transform(viewport.InvViewportMatrix));
+			Assert.AreEqual(new Vector2(-1, -1), new Vector2(0f, window.ClientSize.Y - 1).Transform(viewport.InvViewportMatrix));
+			Assert.AreEqual(new Vector2(1, 1), new Vector2(window.ClientSize.X - 1, 0).Transform(viewport.InvViewportMatrix));
+			return 0;
+		});
 	}
 }

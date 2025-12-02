@@ -31,9 +31,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Target Name="PostPack" AfterTargets="Pack" Condition=" '$(APPVEYOR)' == '' ">
+  <!-- <Target Name="PostPack" AfterTargets="Pack" Condition=" '$(APPVEYOR)' == '' ">
     <Exec Command="dotnet nuget push bin\**.nupkg  -s $(AppData)\..\Local\Temp\NuGetScratch" />
-  </Target>
+  </Target> -->
 
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.9.1" />
