@@ -21,7 +21,7 @@ public class QueryTests
 			queryA.Begin();
 			DrawBox(0f, 0f, 1f, 1f, 0f);
 			queryA.End();
-			Assert.IsTrue(queryA.Result > 0);
+			Assert.IsGreaterThan(0, queryA.Result);
 			queryB.Begin();
 			DrawBox(0f, 0f, 1f, 1f, 0.5f);
 			queryB.End();
@@ -32,13 +32,13 @@ public class QueryTests
 
 	private static void DrawBox(float minX, float minY, float maxX, float maxY, float depth)
 	{
-		Vector3[] points = new Vector3[]
-		{
+		Vector3[] points =
+		[
 			new Vector3(maxX, minY, depth),
 			new Vector3(maxX, maxY, depth),
 			new Vector3(minX, minY, depth),
 			new Vector3(minX, maxY, depth)
-		};
+		];
 		GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, Vector3.SizeInBytes, points);
 		GL.EnableVertexAttribArray(0);
 		GL.DrawArrays(PrimitiveType.TriangleStrip, 0, points.Length); // draw with vertex array data

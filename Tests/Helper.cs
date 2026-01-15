@@ -1,8 +1,10 @@
-﻿using OpenTK.Mathematics;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using System;
 
+[assembly:DoNotParallelize]
 namespace Zenseless.OpenTK.Tests;
 
 internal class Helper

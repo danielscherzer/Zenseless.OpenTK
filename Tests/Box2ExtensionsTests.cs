@@ -58,7 +58,7 @@ public class Box2ExtensionsTests
 	}
 
 	[TestMethod()]
-	[DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
+	[DynamicData(nameof(GetData))]
 	public void UndoOberlapTest(Box2 boxA, Box2 boxB, Box2 expected)
 	{
 		var actual = Box2Extensions.UndoOberlap(boxA, boxB);
