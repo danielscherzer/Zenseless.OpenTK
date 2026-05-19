@@ -20,7 +20,7 @@ public class Texture2D : Texture
 	{
 		Width = width;
 		Height = height;
-		if (-1 == levels) levels = MathHelper.MipMapLevelCount(width, height);
+		if (-1 == levels) levels = MathExtensions.MipMapLevelCount(width, height);
 		GL.TextureStorage2D(Handle, levels, format, width, height);
 	}
 
